@@ -1,0 +1,67 @@
+{
+    // Each array is a page
+    "sites": [
+        // A page can only contain up to 14 items
+        [
+            // A direct link
+            {
+                "type": "link",
+                "name": "Google",
+                "url": "https://google.com",
+                "id": "random uuid",
+                "icon": {
+                    // Can either be "basic" or "img"
+                    "type": "basic",
+                    "bgColor": "#AB07C2",
+                    "bgText": "Google",
+                    "bgTextSize": 15
+                }
+            },
+            // A folder
+            {
+                "type": "folder",
+                "name": "School Folder",
+                "id": "random uuid",
+                // An array of direct link
+                "children": [
+                    {
+                        "name": "Google",
+                        "url": "https://google.com",
+                        "id": "random uuid",
+                        "icon": {
+                            // Can either be "basic" or "img"
+                            "type": "img",
+                            "url": "https://imgui.com/some-img"
+                        }
+                    },
+                    {
+                        "name": "Google",
+                        "url": "https://google.com",
+                        "id": "random uuid",
+                        "icon": {
+                            // Can either be "basic" or "img"
+                            "type": "Basic",
+                            "bgColor": "#AB07C2",
+                            "bgText": "Google",
+                            "bgTextSize": 15
+                        }
+                    }
+                ]
+            }
+        ]
+    ],
+    "bgImg": "http://anUrlToAnImg.com/randomImg",
+    "activeSearchEngines": [
+        {
+            "name": "Google",
+            "icon": {
+                // Same thing as link icon
+                "type": "Basic",
+                "bgColor": "#AB07C2",
+                "bgText": "Google",
+                "bgTextSize": 15
+            },
+            "url": "https://searchengine.com?q=%s" // %s is replaced with search query,
+        }
+    ]
+}

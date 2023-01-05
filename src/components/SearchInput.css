@@ -1,0 +1,28 @@
+.search-input {
+    display: flex;
+    border: 1px solid gray;
+    border-radius: 8px;
+    margin-top: 20vh;
+    width: 50%;
+    max-width: 672px;
+    height: 56px;
+    align-items: center;
+}
+
+.icon {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    margin: 5px;
+}
+
+.search {
+    margin-left: 15px;
+    outline: none;
+    height: 100%;
+    width: 100%;
+    border: none;
+    background: transparent;
+    font-size: 18px;
+    font-family: inherit;
+}
