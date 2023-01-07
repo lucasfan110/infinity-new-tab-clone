@@ -15,7 +15,29 @@
         <title>Vite + React + TS</title>
     </head>
     <body>
-        <div id="root"></div>
+        <div id="root">
+            <div>
+                <ul id="output"></ul>
+            </div>
+        </div>
+
         <script type="module" src="/src/main.tsx"></script>
+
+        <!-- <script defer>
+            function autocomplete(data) {
+                console.log(data[1]);
+                const output = document.querySelector("#root");
+                data[1].map(a => {
+                    const elem = document.createElement("li");
+                    elem.innerHTML = a[0];
+
+                    output.append(elem);
+                });
+            }
+        </script> -->
+        <!-- <script
+            defer
+            src="https://www.google.com/complete/search?client=hp&hl=en&sugexp=msedr&gs_rn=62&gs_ri=hp&cp=1&gs_id=9c&q=among&xhr=t&callback=autocomplete"
+        ></script> -->
     </body>
 </html>

@@ -1,0 +1,31 @@
+.search-nav {
+    margin-bottom: 20px;
+    align-self: flex-start;
+
+    ul {
+        list-style: none;
+        padding: 0;
+        margin-left: 10px;
+
+        li {
+            display: inline;
+            margin-right: 30px;
+        }
+    }
+
+    p.search-type {
+        color: rgba(255, 255, 255, 0.8);
+        opacity: 0.5;
+        text-decoration: none;
+        display: inline;
+        cursor: pointer;
+
+        &:hover {
+            opacity: 0.75;
+        }
+
+        &.active {
+            opacity: 1;
+        }
+    }
+}

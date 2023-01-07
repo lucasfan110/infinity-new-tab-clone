@@ -1,0 +1,11 @@
+.search {
+    display: flex;
+    justify-content: center;
+    height: 20vh;
+    align-items: flex-end;
+
+    .search-box {
+        width: 50%;
+        max-width: 672px;
+    }
+}
