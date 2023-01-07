@@ -2,29 +2,36 @@ import { useState } from "react";
 import "./Autocomplete.scss";
 
 declare global {
-    function generateAutocompleteJsx(data: any): void;
+    function autocomplete(data: any): void;
 }
 
-let setAutocomplete: React.Dispatch<React.SetStateAction<JSX.Element>> | null =
-    null;
+let setAutocomplete: React.Dispatch<
+    React.SetStateAction<string[] | null>
+> | null = null;
 
-window.generateAutocompleteJsx = data => {
+window.autocomplete = data => {
     console.log(data);
     if (!data) {
-        setAutocomplete?.(<></>);
+        setAutocomplete?.(null);
         return;
     }
 
-    const renderedAutocomplete = data[1].map((d: any, index: number) => (
-        <li dangerouslySetInnerHTML={{ __html: d[0] }} key={index}></li>
-    ));
+    const autocomplete = data[1].map((d: any) => {
+        return d[0];
+    });
 
-    setAutocomplete?.(<ul>{renderedAutocomplete}</ul>);
+    setAutocomplete?.(autocomplete);
+
+    // const renderedAutocomplete = data[1].map((d: any, index: number) => (
+    //     <li dangerouslySetInnerHTML={{ __html: d[0] }} key={index}></li>
+    // ));
+
+    // setAutocomplete?.(<ul>{renderedAutocomplete}</ul>);
 };
 
 export default function Autocomplete() {
-    const [autocomplete, _setAutocomplete] = useState(<></>);
+    const [autocomplete, _setAutocomplete] = useState<string[] | null>(null);
     setAutocomplete = _setAutocomplete;
 
-    return <div className="autocomplete">{autocomplete}</div>;
+    return <div className="autocomplete"></div>;
 }

@@ -11,7 +11,7 @@ export default function useAutoComplete(query: string) {
         }
 
         if (!query) {
-            generateAutocompleteJsx(null);
+            autocomplete(null);
             return;
         }
 
@@ -23,7 +23,7 @@ export default function useAutoComplete(query: string) {
             const script = document.createElement("script");
 
             script.id = "autocomplete";
-            script.src = `https://www.google.com/complete/search?client=hp&hl=en&sugexp=msedr&gs_rn=62&gs_ri=hp&cp=1&gs_id=9c&q=${query}&xhr=t&callback=generateAutocompleteJsx`;
+            script.src = `https://www.google.com/complete/search?client=hp&hl=en&sugexp=msedr&gs_rn=62&gs_ri=hp&cp=1&gs_id=9c&q=${query}&xhr=t&callback=autocomplete`;
             script.async = true;
 
             document.body.append(script);
