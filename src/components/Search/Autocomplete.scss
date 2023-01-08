@@ -12,9 +12,10 @@
         box-sizing: border-box;
         line-height: 5px;
         cursor: pointer;
+        transition: background-color 200ms ease;
 
         &:hover {
-            background-color: gray;
+            background-color: rgb(230, 230, 230);
         }
     }
 }

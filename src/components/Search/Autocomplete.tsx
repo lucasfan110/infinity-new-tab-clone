@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./Autocomplete.scss";
 
 declare global {
@@ -9,8 +9,6 @@ let setAutocomplete: React.Dispatch<React.SetStateAction<string[]>> | null =
     null;
 
 window.autocomplete = data => {
-    console.log(data);
-
     if (!data) {
         setAutocomplete?.([]);
         return;
@@ -29,6 +27,26 @@ export default function Autocomplete({ search }: Props) {
     const [autocomplete, _setAutocomplete] = useState<string[]>([]);
     setAutocomplete = _setAutocomplete;
 
+    const autocompleteDiv = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const handleClick = (event: MouseEvent) => {
+            if (!autocompleteDiv.current) {
+                return;
+            }
+
+            // User clicked outside the autocomplete, hide it
+            if (!autocompleteDiv.current.contains(event.target as Node)) {
+                _setAutocomplete([]);
+            }
+        };
+
+        document.body.addEventListener("click", handleClick, true);
+        return () => {
+            document.body.removeEventListener("click", handleClick, true);
+        };
+    }, []);
+
     if (autocomplete.length === 0) {
         return null;
     }
@@ -43,5 +61,9 @@ export default function Autocomplete({ search }: Props) {
         </div>
     ));
 
-    return <div className="autocomplete">{renderedAutocomplete}</div>;
+    return (
+        <div className="autocomplete" ref={autocompleteDiv}>
+            {renderedAutocomplete}
+        </div>
+    );
 }

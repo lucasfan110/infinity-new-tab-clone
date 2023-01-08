@@ -11,7 +11,10 @@ export const DEFAULT_ENGINE_LIST: SearchEngine[] = [
         id: "89b4e228-0f13-4b86-8c83-1d5a3b45ecc9",
         searchUrl: {
             Web: "https://www.google.com/search?q=%s",
-            Test: "bruh",
+            Images: "https://www.google.com/search?tbm=isch&q=%s",
+            News: "https://www.google.com/search?tbm=nws&q=%s",
+            Videos: "https://www.google.com/search?tbm=vid&q=%s",
+            Maps: "https://www.google.com/maps/preview?q=%s",
         },
     },
 ];

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
 import "./SearchNav.scss";
@@ -13,18 +13,24 @@ export default function SearchNav({ setCurrentSearchUrl, searchUrls }: Props) {
         activeEngine: { searchUrl },
     } = useSelector((state: RootState) => state.searchEngine);
 
+    const searchTypes = Object.keys(searchUrls);
+    const [activeSearchType, setActiveSearchType] = useState(searchTypes[0]);
+
     const handleTypeClick = (searchType: string) => {
         if (typeof searchUrl === "string") {
             return;
         }
 
+        setActiveSearchType(searchType);
         setCurrentSearchUrl(searchUrl[searchType]);
     };
 
-    const nav = Object.keys(searchUrls).map(searchType => (
+    const nav = searchTypes.map(searchType => (
         <li key={searchType}>
             <p
-                className="search-type"
+                className={`search-type ${
+                    searchType === activeSearchType ? "active" : ""
+                }`}
                 onClick={() => handleTypeClick(searchType)}
             >
                 {searchType}
