@@ -10,23 +10,24 @@ export default function useAutoComplete(query: string) {
             document.body.removeChild(oldScript as Node);
         }
 
+        if (timerId.current) {
+            clearTimeout(timerId.current);
+        }
+
         if (!query) {
             autocomplete(null);
             return;
-        }
-
-        if (timerId.current) {
-            clearTimeout(timerId.current);
         }
 
         timerId.current = setTimeout(() => {
             const script = document.createElement("script");
 
             script.id = "autocomplete";
-            script.src = `https://www.google.com/complete/search?client=hp&hl=en&sugexp=msedr&gs_rn=62&gs_ri=hp&cp=1&gs_id=9c&q=${query}&xhr=t&callback=autocomplete`;
+            // script.src = `https://www.google.com/complete/search?client=hp&hl=en&sugexp=msedr&gs_rn=62&gs_ri=hp&cp=1&gs_id=9c&q=${query}&xhr=t&callback=autocomplete`;
+            script.src = `http://google.com/complete/search?client=chrome&output=json&q=${query}&callback=autocomplete`;
             script.async = true;
 
             document.body.append(script);
-        }, 1000);
+        }, 200);
     }, [query]);
 }

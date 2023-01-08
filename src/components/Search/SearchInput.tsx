@@ -1,32 +1,18 @@
-import { useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { useSelector } from "react-redux";
-import useAutoComplete from "../../hooks/useAutocomplete";
 import { RootState } from "../../store";
 import "./SearchInput.scss";
 
 interface Props {
-    currentSearchUrl: string;
+    query: string;
+    setQuery: React.Dispatch<React.SetStateAction<string>>;
+    onSubmit(event: React.FormEvent<HTMLFormElement>): void;
 }
 
-export default function SearchInput({ currentSearchUrl }: Props) {
+export default function SearchInput({ query, setQuery, onSubmit }: Props) {
     const { activeEngine: engine } = useSelector(
         (state: RootState) => state.searchEngine
     );
-
-    const [query, setQuery] = useState("");
-    useAutoComplete(query);
-
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-
-        if (!query) {
-            return;
-        }
-
-        const url = currentSearchUrl.replace("%s", query);
-        window.open(url, "_black")?.focus();
-    };
 
     let icon;
     switch (engine.icon.type) {
@@ -49,7 +35,7 @@ export default function SearchInput({ currentSearchUrl }: Props) {
             className="search-input-form"
             action="https://www.google.com/search"
             autoComplete="off"
-            onSubmit={handleSubmit}
+            onSubmit={onSubmit}
         >
             <div className="icon-container">{icon}</div>
 

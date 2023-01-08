@@ -5,33 +5,43 @@ declare global {
     function autocomplete(data: any): void;
 }
 
-let setAutocomplete: React.Dispatch<
-    React.SetStateAction<string[] | null>
-> | null = null;
+let setAutocomplete: React.Dispatch<React.SetStateAction<string[]>> | null =
+    null;
 
 window.autocomplete = data => {
     console.log(data);
+
     if (!data) {
-        setAutocomplete?.(null);
+        setAutocomplete?.([]);
         return;
     }
 
-    const autocomplete = data[1].map((d: any) => {
-        return d[0];
-    });
+    const autocomplete = data[1];
 
     setAutocomplete?.(autocomplete);
-
-    // const renderedAutocomplete = data[1].map((d: any, index: number) => (
-    //     <li dangerouslySetInnerHTML={{ __html: d[0] }} key={index}></li>
-    // ));
-
-    // setAutocomplete?.(<ul>{renderedAutocomplete}</ul>);
 };
 
-export default function Autocomplete() {
-    const [autocomplete, _setAutocomplete] = useState<string[] | null>(null);
+interface Props {
+    search(query: string): void;
+}
+
+export default function Autocomplete({ search }: Props) {
+    const [autocomplete, _setAutocomplete] = useState<string[]>([]);
     setAutocomplete = _setAutocomplete;
 
-    return <div className="autocomplete"></div>;
+    if (autocomplete.length === 0) {
+        return null;
+    }
+
+    const renderedAutocomplete = autocomplete.map((a, index) => (
+        <div
+            className="autocomplete-item"
+            onClick={() => search(a)}
+            key={index}
+        >
+            <p>{a}</p>
+        </div>
+    ));
+
+    return <div className="autocomplete">{renderedAutocomplete}</div>;
 }

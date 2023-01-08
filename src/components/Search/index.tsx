@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import useAutoComplete from "../../hooks/useAutocomplete";
 import { RootState } from "../../store";
 import Autocomplete from "./Autocomplete";
 import "./index.scss";
@@ -16,6 +17,23 @@ export default function Search() {
     const [currentSearchUrl, setCurrentSearchUrl] = useState(
         typeof searchUrl === "string" ? searchUrl : Object.values(searchUrl)[0]
     );
+    const [query, setQuery] = useState("");
+    useAutoComplete(query);
+
+    const search = (query: string) => {
+        if (!query) {
+            return;
+        }
+
+        const url = currentSearchUrl.replace("%s", query);
+        window.open(url, "_black")?.focus();
+        setQuery("");
+    };
+
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        search(query);
+    };
 
     return (
         <div className="search">
@@ -24,8 +42,12 @@ export default function Search() {
                     setCurrentSearchUrl={setCurrentSearchUrl}
                     searchUrls={searchUrls}
                 />
-                <SearchInput currentSearchUrl={currentSearchUrl} />
-                <Autocomplete />
+                <SearchInput
+                    query={query}
+                    setQuery={setQuery}
+                    onSubmit={handleSubmit}
+                />
+                <Autocomplete search={search} />
             </div>
         </div>
     );
