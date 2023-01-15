@@ -1,6 +1,5 @@
 .search-input-form {
     display: flex;
-    border: 1px solid gray;
     border-radius: 8px;
     width: 100%;
     height: var(--search-input-height);
@@ -27,6 +26,7 @@
         display: inline-block;
         width: 40px;
         height: 40px;
+        margin: 0 5px;
     }
 
     .search-input {
@@ -52,5 +52,12 @@
         background-color: black;
         cursor: pointer;
         justify-self: flex-end;
+        border-top-right-radius: 8px;
+        border-bottom-right-radius: 8px;
+    }
+
+    .caret-down {
+        color: rgb(204, 204, 204);
+        margin-right: 5px;
     }
 }

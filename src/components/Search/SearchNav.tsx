@@ -1,35 +1,33 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import { RootState } from "../../store";
+import React from "react";
 import "./SearchNav.scss";
 
 interface Props {
-    setCurrentSearchUrl: React.Dispatch<React.SetStateAction<string>>;
+    setCurrentUrlIndex: React.Dispatch<React.SetStateAction<number>>;
     searchUrls: { [key: string]: string };
+    currentUrlIndex: number;
 }
 
-export default function SearchNav({ setCurrentSearchUrl, searchUrls }: Props) {
-    const {
-        activeEngine: { searchUrl },
-    } = useSelector((state: RootState) => state.searchEngine);
-
+export default function SearchNav({
+    setCurrentUrlIndex,
+    searchUrls,
+    currentUrlIndex,
+}: Props) {
     const searchTypes = Object.keys(searchUrls);
-    const [activeSearchType, setActiveSearchType] = useState(searchTypes[0]);
 
     const handleTypeClick = (searchType: string) => {
-        if (typeof searchUrl === "string") {
+        if (typeof searchUrls === "string") {
             return;
         }
 
-        setActiveSearchType(searchType);
-        setCurrentSearchUrl(searchUrl[searchType]);
+        const keysArray = Object.keys(searchUrls);
+        setCurrentUrlIndex(keysArray.findIndex(url => url === searchType));
     };
 
-    const nav = searchTypes.map(searchType => (
+    const nav = searchTypes.map((searchType, index) => (
         <li key={searchType}>
             <p
                 className={`search-type ${
-                    searchType === activeSearchType ? "active" : ""
+                    index === currentUrlIndex ? "active" : ""
                 }`}
                 onClick={() => handleTypeClick(searchType)}
             >

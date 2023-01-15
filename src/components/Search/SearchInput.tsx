@@ -1,34 +1,31 @@
-import { FaSearch } from "react-icons/fa";
+import { FaCaretDown, FaSearch } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
+import displayIcon from "../../utils/displayIcon";
 import "./SearchInput.scss";
 
 interface Props {
     query: string;
     setQuery: React.Dispatch<React.SetStateAction<string>>;
     onSubmit(event: React.FormEvent<HTMLFormElement>): void;
+    setShowEngineSwitch: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function SearchInput({ query, setQuery, onSubmit }: Props) {
+export default function SearchInput({
+    query,
+    setQuery,
+    onSubmit,
+    setShowEngineSwitch,
+}: Props) {
     const { activeEngine: engine } = useSelector(
         (state: RootState) => state.searchEngine
     );
 
-    let icon;
-    switch (engine.icon.type) {
-        case "basic":
-            icon = <div>{engine.icon.bgText}</div>;
-            break;
-        case "img":
-            icon = (
-                <img
-                    src={engine.icon.url}
-                    alt="search engine icon"
-                    className="search-engine-icon"
-                />
-            );
-            break;
-    }
+    const icon = displayIcon(engine.icon, ["search-engine-icon"]);
+
+    const handleIconSwitch = () => {
+        setShowEngineSwitch(true);
+    };
 
     return (
         <form
@@ -37,7 +34,10 @@ export default function SearchInput({ query, setQuery, onSubmit }: Props) {
             autoComplete="off"
             onSubmit={onSubmit}
         >
-            <div className="icon-container">{icon}</div>
+            <div className="icon-container" onClick={handleIconSwitch}>
+                {icon}
+                <FaCaretDown className="caret-down" />
+            </div>
 
             <input
                 placeholder="Enter search"

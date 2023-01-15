@@ -1,9 +1,11 @@
-import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import useAutoComplete from "../../hooks/useAutocomplete";
-import { RootState } from "../../store";
+import { RootState, setActiveEngine } from "../../store";
+import { SearchEngine } from "../../types";
 import Autocomplete from "./Autocomplete";
 import "./index.scss";
+import SearchEngineSelect from "./SearchEngineSelect";
 import SearchInput from "./SearchInput";
 import SearchNav from "./SearchNav";
 
@@ -11,13 +13,22 @@ export default function Search() {
     const {
         activeEngine: { searchUrl },
     } = useSelector((state: RootState) => state.searchEngine);
+    const dispatch = useDispatch();
 
     const searchUrls = typeof searchUrl === "string" ? {} : searchUrl;
 
-    const [currentSearchUrl, setCurrentSearchUrl] = useState(
-        typeof searchUrl === "string" ? searchUrl : Object.values(searchUrl)[0]
-    );
+    const [currentUrlIndex, setCurrentUrlIndex] = useState(0);
+    const currentSearchUrl =
+        typeof searchUrl === "string"
+            ? searchUrl
+            : Object.values(searchUrl)[currentUrlIndex];
+
+    useEffect(() => {
+        setCurrentUrlIndex(0);
+    }, [searchUrl]);
+
     const [query, setQuery] = useState("");
+    const [showEngineSwitch, setShowEngineSwitch] = useState(false);
     useAutoComplete(query);
 
     const search = (query: string) => {
@@ -35,17 +46,30 @@ export default function Search() {
         search(query);
     };
 
+    const handleEngineSelect = (engine: SearchEngine) => {
+        dispatch(setActiveEngine(engine));
+        setShowEngineSwitch(false);
+    };
+
     return (
         <div className="search">
             <div className="search-box">
                 <SearchNav
-                    setCurrentSearchUrl={setCurrentSearchUrl}
+                    setCurrentUrlIndex={setCurrentUrlIndex}
                     searchUrls={searchUrls}
+                    currentUrlIndex={currentUrlIndex}
                 />
                 <SearchInput
                     query={query}
                     setQuery={setQuery}
                     onSubmit={handleSubmit}
+                    setShowEngineSwitch={setShowEngineSwitch}
+                />
+
+                <SearchEngineSelect
+                    show={showEngineSwitch}
+                    onClose={() => setShowEngineSwitch(false)}
+                    onSelect={handleEngineSelect}
                 />
                 <Autocomplete search={search} />
             </div>
