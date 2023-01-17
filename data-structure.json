@@ -53,30 +53,20 @@
     "bgImg": "https://wallpaperaccess.com/full/469536.jpg",
     "additionalSearchEngines": [
         {
-            "name": "Google",
+            "name": "Bruh",
             "icon": {
-                // Same thing as link icon
                 "type": "basic",
                 "bgColor": "#AB07C2",
                 "bgText": "Google",
                 "bgTextSize": 15
             },
-            "searchUrl": {
-                "Web": "https://searchengine.com?q=%s", // %s is replaced with search query
-                "Images": "https://searchengine.com/searchimg?q=%s"
-            },
-            "id": "random uuid"
-        },
-        {
-            "name": "Fake Google",
-            "icon": {
-                // Same thing as link icon
-                "type": "img",
-                "url": "bruh"
-            },
-            "searchUrl": "url", // if only an url then don't show the search navbar
+            "searchUrl": "url", // Can only be one url,
             "id": "random uuid"
         }
     ],
-    "activeSearchEngines": "id to the search engine"
+    "activeSearchEngines": [
+        "id1",
+        "id2"
+    ], // An array of id to the engines
+    "currentSearchEngine": "id to the search engine"
 }

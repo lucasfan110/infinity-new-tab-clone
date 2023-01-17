@@ -1,3 +1,5 @@
+$primary-color: rgb(243, 243, 243);
+
 .search-engine-select {
     background-color: white;
     z-index: 11;
@@ -20,7 +22,9 @@
     .select {
         width: 100px;
         height: 100px;
-        background-color: rgb(233, 233, 233);
+        border-color: black;
+        border-right: 1px solid $primary-color;
+        border-bottom-width: 1px solid $primary-color;
         transition: background-color 0.2s;
         flex-direction: column;
         cursor: pointer;
@@ -35,7 +39,7 @@
         }
 
         &:hover {
-            background-color: gray;
+            background-color: $primary-color;
         }
     }
 

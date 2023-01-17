@@ -17,7 +17,7 @@ export default function SearchInput({
     onSubmit,
     setShowEngineSwitch,
 }: Props) {
-    const { activeEngine: engine } = useSelector(
+    const { currentEngine: engine } = useSelector(
         (state: RootState) => state.searchEngine
     );
 

@@ -1,55 +1,21 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { SearchEngine } from "../../types";
+import _DEFAULT_ENGINE_LIST from "./DEFAULT_ENGINE_LIST.json";
 
-export const DEFAULT_ENGINE_LIST: SearchEngine[] = [
-    {
-        name: "Google",
-        icon: {
-            type: "img",
-            url: "https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-512.png",
-        },
-        id: "89b4e228-0f13-4b86-8c83-1d5a3b45ecc9",
-        searchUrl: {
-            Web: "https://www.google.com/search?q=%s",
-            Images: "https://www.google.com/search?tbm=isch&q=%s",
-            News: "https://www.google.com/search?tbm=nws&q=%s",
-            Videos: "https://www.google.com/search?tbm=vid&q=%s",
-            Maps: "https://www.google.com/maps/preview?q=%s",
-        },
-    },
-    {
-        name: "Google-Another",
-        icon: {
-            type: "img",
-            url: "https://i.pinimg.com/originals/dd/5d/db/dd5ddbbefebdddd0f0f4308c93371c37.jpg",
-        },
-        id: "89b4e228-0f13-4b86-8c83-1d5a3b45ecc0",
-        searchUrl: {
-            Web: "https://www.google.com/search?q=%s",
-            Images: "https://www.google.com/search?tbm=isch&q=%s",
-            News: "https://www.google.com/search?tbm=nws&q=%s",
-            Videos: "https://www.google.com/search?tbm=vid&q=%s",
-            Maps: "https://www.google.com/maps/preview?q=%s",
-        },
-    },
-    {
-        name: "Bruh",
-        icon: {
-            type: "basic",
-            bgColor: "blue",
-            bgText: "Bruh",
-            bgTextSize: 15,
-        },
-        id: "89b4e228-0f13-4b86-8c83-1d5a3b45ecc1",
-        searchUrl: {
-            Web: "https://www.bruh.com/%s",
-        },
-    },
-];
+export const DEFAULT_ENGINE_LIST: SearchEngine[] =
+    _DEFAULT_ENGINE_LIST as SearchEngine[];
+
+export function getActiveEngines(
+    engineList: SearchEngine[],
+    activeEngineIds: string[]
+) {
+    return engineList.filter(e => activeEngineIds.includes(e.id));
+}
 
 type SliceType = {
     engineList: SearchEngine[];
-    activeEngine: SearchEngine;
+    activeEngineIds: string[];
+    currentEngine: SearchEngine;
 };
 
 function initiateSlice(): SliceType {
@@ -57,20 +23,23 @@ function initiateSlice(): SliceType {
         localStorage.getItem("additionalSearchEngines") || "[]"
     );
 
-    const engineList = [...DEFAULT_ENGINE_LIST, ...additionalEngineList];
+    const allEnginesList = [...DEFAULT_ENGINE_LIST, ...additionalEngineList];
+    const activeEngineIds: string[] = JSON.parse(
+        localStorage.getItem("activeSearchEngines") || "[]"
+    );
 
     const activeEngineId =
-        localStorage.getItem("activeSearchEngine") || DEFAULT_ENGINE_LIST[0].id;
+        localStorage.getItem("currentSearchEngine") ||
+        DEFAULT_ENGINE_LIST[0].id;
 
-    const activeEngine = engineList.find(s => s.id === activeEngineId);
-
-    if (!activeEngine) {
-        throw new Error("What the fuck how did this happen???");
-    }
+    const currentEngine =
+        allEnginesList.find(s => s.id === activeEngineId) ??
+        DEFAULT_ENGINE_LIST[0];
 
     return {
-        engineList,
-        activeEngine,
+        engineList: allEnginesList,
+        activeEngineIds,
+        currentEngine,
     };
 }
 
@@ -79,7 +48,7 @@ const searchEngineSlice = createSlice({
     initialState: initiateSlice(),
     reducers: {
         setActiveEngine(state, action: PayloadAction<SearchEngine>) {
-            state.activeEngine = action.payload;
+            state.currentEngine = action.payload;
         },
     },
 });

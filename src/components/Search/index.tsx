@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import useAutoComplete from "../../hooks/useAutocomplete";
 import { RootState, setActiveEngine } from "../../store";
 import { SearchEngine } from "../../types";
+import AddEngineSidebar from "./AddEngineSidebar";
 import Autocomplete from "./Autocomplete";
 import "./index.scss";
 import SearchEngineSelect from "./SearchEngineSelect";
@@ -11,7 +12,7 @@ import SearchNav from "./SearchNav";
 
 export default function Search() {
     const {
-        activeEngine: { searchUrl },
+        currentEngine: { searchUrl },
     } = useSelector((state: RootState) => state.searchEngine);
     const dispatch = useDispatch();
 
@@ -22,6 +23,7 @@ export default function Search() {
         typeof searchUrl === "string"
             ? searchUrl
             : Object.values(searchUrl)[currentUrlIndex];
+    const [showSidebar, setShowSidebar] = useState(false);
 
     useEffect(() => {
         setCurrentUrlIndex(0);
@@ -70,8 +72,14 @@ export default function Search() {
                     show={showEngineSwitch}
                     onClose={() => setShowEngineSwitch(false)}
                     onSelect={handleEngineSelect}
+                    onAdd={() => setShowSidebar(true)}
                 />
                 <Autocomplete search={search} />
+
+                <AddEngineSidebar
+                    show={showSidebar}
+                    onClose={() => setShowSidebar(false)}
+                />
             </div>
         </div>
     );

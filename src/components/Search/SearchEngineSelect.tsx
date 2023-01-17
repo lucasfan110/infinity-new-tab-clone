@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { RootState } from "../../store";
+import { getActiveEngines, RootState } from "../../store";
 import { SearchEngine } from "../../types";
 import displayIcon from "../../utils/displayIcon";
 import "./SearchEngineSelect.scss";
@@ -9,15 +9,19 @@ interface Props {
     show?: boolean;
     onClose?(): void;
     onSelect?(engine: SearchEngine): void;
+    onAdd?(): void;
 }
 
 export default function SearchEngineSelect({
     show = true,
     onClose,
     onSelect,
+    onAdd,
 }: Props) {
-    const engineList = useSelector(
-        (state: RootState) => state.searchEngine.engineList
+    const activeEnginesList = useSelector(
+        ({ searchEngine: { engineList, activeEngineIds } }: RootState) => {
+            return getActiveEngines(engineList, activeEngineIds);
+        }
     );
     const [backgroundColor, setBackgroundColor] = useState("");
 
@@ -39,7 +43,11 @@ export default function SearchEngineSelect({
         onSelect?.(engine);
     };
 
-    const renderedEngineList = engineList.map(engine => {
+    const handleAddEngine = () => {
+        onAdd?.();
+    };
+
+    const renderedEngineList = activeEnginesList.map(engine => {
         const icon = displayIcon(engine.icon, ["engine-icon"]);
 
         return (
@@ -55,7 +63,21 @@ export default function SearchEngineSelect({
     return (
         <>
             <div className="search-engine-select">
-                <ul>{renderedEngineList}</ul>
+                <ul>
+                    {renderedEngineList}
+                    <li onClick={handleAddEngine}>
+                        <div className="select">
+                            <div className="engine-icon-wrapper">
+                                <img
+                                    src="./plus-sign.png"
+                                    alt="add"
+                                    className="engine-icon"
+                                />
+                            </div>
+                            <div className="icon-name">Add</div>
+                        </div>
+                    </li>
+                </ul>
             </div>
             <div
                 className="overlay"

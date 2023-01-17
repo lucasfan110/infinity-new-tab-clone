@@ -1,0 +1,36 @@
+.add-engine-sidebar {
+    right: 0;
+    top: 0;
+    height: 100vh;
+    position: absolute;
+    background-color: white;
+    z-index: 21;
+    transition: 0.2s;
+
+    .close-button {
+        transform: translate(-40px, 0px);
+        background: none;
+        color: white;
+        font-size: 20px;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 40px;
+        height: 40px;
+
+        &:hover {
+            background-color: rgba(0, 0, 0, 1);
+        }
+    }
+}
+
+.mask {
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    z-index: 21;
+}
