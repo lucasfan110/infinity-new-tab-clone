@@ -51,7 +51,11 @@ export default function SearchEngineSelect({
         const icon = displayIcon(engine.icon, ["engine-icon"]);
 
         return (
-            <li key={engine.id} onClick={() => handleEngineSelect(engine)}>
+            <li
+                key={engine.id}
+                onClick={() => handleEngineSelect(engine)}
+                className="no-select"
+            >
                 <div className="select">
                     <div className="engine-icon-wrapper">{icon}</div>
                     <div className="icon-name">{engine.name}</div>
@@ -65,7 +69,7 @@ export default function SearchEngineSelect({
             <div className="search-engine-select">
                 <ul>
                     {renderedEngineList}
-                    <li onClick={handleAddEngine}>
+                    <li onClick={handleAddEngine} className="no-select">
                         <div className="select">
                             <div className="engine-icon-wrapper">
                                 <img

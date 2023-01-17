@@ -24,7 +24,7 @@ export default function SearchNav({
     };
 
     const nav = searchTypes.map((searchType, index) => (
-        <li key={searchType}>
+        <li key={searchType} className="no-select">
             <p
                 className={`search-type ${
                     index === currentUrlIndex ? "active" : ""

@@ -34,7 +34,10 @@ export default function SearchInput({
             autoComplete="off"
             onSubmit={onSubmit}
         >
-            <div className="icon-container" onClick={handleIconSwitch}>
+            <div
+                className="icon-container no-select"
+                onClick={handleIconSwitch}
+            >
                 {icon}
                 <FaCaretDown className="caret-down" />
             </div>
