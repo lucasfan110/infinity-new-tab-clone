@@ -19,8 +19,7 @@ export default function SearchNav({
             return;
         }
 
-        const keysArray = Object.keys(searchUrls);
-        setCurrentUrlIndex(keysArray.findIndex(url => url === searchType));
+        setCurrentUrlIndex(searchTypes.findIndex(url => url === searchType));
     };
 
     const nav = searchTypes.map((searchType, index) => (
