@@ -1,0 +1,45 @@
+.add-engine-sidebar {
+    right: 0;
+    top: 0;
+    height: 100vh;
+    position: absolute;
+    background-color: white;
+    z-index: 21;
+    transition: 0.2s;
+
+    .close-button {
+        background: none;
+        color: white;
+        font-size: 20px;
+        border: none;
+        cursor: pointer;
+        width: 40px;
+        height: 40px;
+        position: absolute;
+        right: 50vw;
+
+        .icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        &:hover {
+            background-color: rgba(0, 0, 0, 1);
+        }
+    }
+
+    h1 {
+        font-weight: normal;
+        margin: 40px;
+    }
+}
+
+.mask {
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    z-index: 21;
+}
