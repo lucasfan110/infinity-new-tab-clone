@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import useAutoComplete from "../../hooks/useAutocomplete";
 import { RootState, setActiveEngine } from "../../store";
 import { SearchEngine } from "../../types";
-import AddEngineSidebar from "./AddEngineSidebar";
+import AddEngineSidebar from "../AddEngineSidebar";
 import Autocomplete from "./Autocomplete";
 import "./index.scss";
 import SearchEngineSelect from "./SearchEngineSelect";

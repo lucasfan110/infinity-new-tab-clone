@@ -4,7 +4,7 @@ export default function useAutoComplete(query: string) {
     let timerId = useRef<number | null>(null);
 
     useEffect(() => {
-        const oldScript = document.querySelector("#autocomplete");
+        const oldScript = document.querySelector("script#autocomplete");
 
         if (oldScript) {
             document.body.removeChild(oldScript as Node);
@@ -23,7 +23,7 @@ export default function useAutoComplete(query: string) {
             const script = document.createElement("script");
 
             script.id = "autocomplete";
-            script.src = `http://google.com/complete/search?client=chrome&output=json&q=${query}&callback=autocomplete`;
+            script.src = `https://google.com/complete/search?client=chrome&output=json&q=${query}&callback=autocomplete`;
             script.async = true;
 
             document.body.append(script);
