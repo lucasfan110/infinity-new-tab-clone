@@ -5,7 +5,6 @@ import { RootState, setActiveEngine } from "../../store";
 import { SearchEngine } from "../../types";
 import AddEngineSidebar from "../AddEngineSidebar";
 import Autocomplete from "./Autocomplete";
-import "./index.scss";
 import SearchEngineSelect from "./SearchEngineSelect";
 import SearchInput from "./SearchInput";
 import SearchNav from "./SearchNav";
@@ -54,8 +53,8 @@ export default function Search() {
     };
 
     return (
-        <div className="search">
-            <div className="search-box">
+        <div className="flex justify-center pt-[15vh] items-end">
+            <div className="w-1/2 max-w-2xl min-w-[450px]">
                 <SearchNav
                     setCurrentUrlIndex={setCurrentUrlIndex}
                     searchUrls={searchUrls}

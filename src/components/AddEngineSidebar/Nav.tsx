@@ -1,5 +1,5 @@
+import classNames from "classnames";
 import { useEffect, useRef, useState } from "react";
-import "./Nav.scss";
 
 interface Props {
     pages: { [key: string]: React.ReactNode };
@@ -21,7 +21,12 @@ export default function Nav({ pages }: Props) {
         return (
             <li
                 key={key}
-                className={`${activeIndex === index ? "active" : ""}`}
+                className={classNames(
+                    "inline mr-10 cursor-pointer text-nav-gray text-center",
+                    {
+                        underline: activeIndex === index,
+                    }
+                )}
                 onClick={() => handleNavClick(index)}
                 ref={ref => {
                     if (!ref) {
@@ -38,9 +43,12 @@ export default function Nav({ pages }: Props) {
     });
 
     return (
-        <div className="nav">
-            <ul className="nav-list">{renderedPageTitle}</ul>
-            <div className="line" />
+        <div className="mt-10">
+            <div className="">
+                <ul className="border-gray-200 border-y px-4 py-10">
+                    {renderedPageTitle}
+                </ul>
+            </div>
         </div>
     );
 }

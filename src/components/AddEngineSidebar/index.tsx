@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import { FaTimes } from "react-icons/fa";
-import "./index.scss";
 import Nav from "./Nav";
 
 const PAGES = {
@@ -25,24 +24,28 @@ export default function AddEngineSidebar({ show = true, onClose }: Props) {
 
     return (
         <>
-            {show && <div className="mask" onClick={onClose} />}
             {show && (
-                <div
-                    className="add-engine-sidebar"
-                    style={{ width }}
-                    ref={sidebarRef}
-                >
-                    {show && (
-                        <button className="close-button" onClick={onClose}>
-                            <div className="icon">
+                <>
+                    <div className="absolute inset-0 z-20" onClick={onClose} />
+
+                    <div
+                        className="absolute right-0 inset-y-0 bg-white z-20 transition-all"
+                        style={{ width }}
+                        ref={sidebarRef}
+                    >
+                        <button
+                            className="bg-none text-white font-lg border-none cursor-pointer w-10 h-10 absolute right-[50vw] hover:bg-gray-500 transition"
+                            onClick={onClose}
+                        >
+                            <div className="flex items-center justify-center">
                                 <FaTimes />
                             </div>
                         </button>
-                    )}
 
-                    <h1>Add Search Engine</h1>
-                    <Nav pages={PAGES} />
-                </div>
+                        <h1>Add Search Engine</h1>
+                        <Nav pages={PAGES} />
+                    </div>
+                </>
             )}
         </>
     );

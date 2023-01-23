@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import "./Autocomplete.scss";
 
 declare global {
     function autocomplete(data: any): void;
@@ -53,7 +52,7 @@ export default function Autocomplete({ search }: Props) {
 
     const renderedAutocomplete = autocomplete.map((a, index) => (
         <div
-            className="autocomplete-item"
+            className="w-full py-1.5 pl-16 box-border text-md cursor-pointer transition hover:bg-gray-200"
             onClick={() => search(a)}
             key={index}
         >
@@ -62,7 +61,10 @@ export default function Autocomplete({ search }: Props) {
     ));
 
     return (
-        <div className="autocomplete" ref={autocompleteDiv}>
+        <div
+            className="w-full bg-white mt-2.5 box-border rounded"
+            ref={autocompleteDiv}
+        >
             {renderedAutocomplete}
         </div>
     );

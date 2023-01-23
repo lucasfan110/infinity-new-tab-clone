@@ -1,8 +1,6 @@
 import { Icon } from "../types";
 
-export default function displayIcon(icon: Icon, classNames: string[] = []) {
-    const className = classNames.join(" ");
-
+export default function displayIcon(icon: Icon, className: string = "") {
     switch (icon.type) {
         case "basic":
             return (

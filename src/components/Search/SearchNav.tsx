@@ -1,5 +1,5 @@
 import React from "react";
-import "./SearchNav.scss";
+import classNames from "classnames";
 
 interface Props {
     setCurrentUrlIndex: React.Dispatch<React.SetStateAction<number>>;
@@ -22,22 +22,30 @@ export default function SearchNav({
         setCurrentUrlIndex(searchTypes.findIndex(url => url === searchType));
     };
 
-    const nav = searchTypes.map((searchType, index) => (
-        <li key={searchType} className="no-select">
-            <p
-                className={`search-type ${
-                    index === currentUrlIndex ? "active" : ""
-                }`}
-                onClick={() => handleTypeClick(searchType)}
-            >
-                {searchType}
-            </p>
-        </li>
-    ));
+    const nav = searchTypes.map((searchType, index) => {
+        const isActive = index === currentUrlIndex;
+
+        return (
+            <li key={searchType} className="inline select-none mr-12">
+                <p
+                    className={classNames(
+                        "inline text-white cursor-pointer hover:opacity-60",
+                        {
+                            "opacity-80": isActive,
+                            "opacity-40": !isActive,
+                        }
+                    )}
+                    onClick={() => handleTypeClick(searchType)}
+                >
+                    {searchType}
+                </p>
+            </li>
+        );
+    });
 
     return (
-        <div className="search-nav">
-            <ul>{nav}</ul>
+        <div className="align-self-start mb-5">
+            <ul className="p-0 ml-2.5">{nav}</ul>
         </div>
     );
 }
