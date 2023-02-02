@@ -17,7 +17,7 @@ export default function Nav({ pages }: Props) {
             <li
                 key={key}
                 className={classNames(
-                    "inline mr-10 cursor-pointer text-nav-gray text-center transition duration-500 no-select",
+                    "inline mr-10 cursor-pointer text-nav-gray text-center transition duration-500 no-select py-2",
                     {
                         "border-b-2 border-black pb-2": activeIndex === index,
                     }
@@ -34,7 +34,7 @@ export default function Nav({ pages }: Props) {
     return (
         <div className="mt-10">
             <div className="">
-                <ul className="border-gray-200 border-y px-4 py-10">
+                <ul className="border-gray-200 border-y px-12 py-5">
                     {renderedPageTitles}
                 </ul>
             </div>

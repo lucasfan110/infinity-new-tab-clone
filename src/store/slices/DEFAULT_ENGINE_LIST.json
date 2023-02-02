@@ -12,7 +12,9 @@
             "News": "https://www.google.com/search?tbm=nws&q=%s",
             "Videos": "https://www.google.com/search?tbm=vid&q=%s",
             "Maps": "https://www.google.com/maps/preview?q=%s"
-        }
+        },
+        "description": "Google Search Engine is a web search engine developed by Google. It is the most widely used search engine in the world, handling billions of queries each day. Google Search uses a sophisticated algorithm to analyze the vast amount of information on the internet and provide relevant, high-quality results to users.",
+        "certified": true
     },
     {
         "name": "Google-Another",
@@ -27,19 +29,8 @@
             "News": "https://www.google.com/search?tbm=nws&q=%s",
             "Videos": "https://www.google.com/search?tbm=vid&q=%s",
             "Maps": "https://www.google.com/maps/preview?q=%s"
-        }
-    },
-    {
-        "name": "Bruh",
-        "icon": {
-            "type": "basic",
-            "bgColor": "blue",
-            "bgText": "Bruh",
-            "bgTextSize": 15
         },
-        "id": "89b4e228-0f13-4b86-8c83-1d5a3b45ecc1",
-        "searchUrl": {
-            "Web": "https://www.bruh.com/%s"
-        }
+        "description": "testing purposes",
+        "certified": false
     }
 ]

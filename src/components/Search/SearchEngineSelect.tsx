@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { getActiveEngines, RootState } from "../../store";
-import { SearchEngine } from "../../types";
+import { getActiveEngines, RootState, BaseSearchEngine } from "../../store";
 import displayIcon from "../../utils/displayIcon";
 
 interface EngineItemProps {
@@ -23,7 +22,7 @@ function EngineItem({ icon, engineName }: EngineItemProps) {
 interface Props {
     show?: boolean;
     onClose?(): void;
-    onSelect?(engine: SearchEngine): void;
+    onSelect?(engine: BaseSearchEngine): void;
     onAdd?(): void;
 }
 
@@ -34,8 +33,17 @@ export default function SearchEngineSelect({
     onAdd,
 }: Props) {
     const activeEnginesList = useSelector(
-        ({ searchEngine: { engineList, activeEngineIds } }: RootState) => {
-            return getActiveEngines(engineList, activeEngineIds);
+        ({
+            searchEngine: {
+                defaultEngines,
+                customizedEngines,
+                activeEngineIds,
+            },
+        }: RootState) => {
+            return getActiveEngines(
+                [...defaultEngines, ...customizedEngines],
+                activeEngineIds
+            );
         }
     );
     const [backgroundColor, setBackgroundColor] = useState("");
@@ -55,7 +63,7 @@ export default function SearchEngineSelect({
         return null;
     }
 
-    const handleEngineSelect = (engine: SearchEngine) => {
+    const handleEngineSelect = (engine: BaseSearchEngine) => {
         onSelect?.(engine);
     };
 

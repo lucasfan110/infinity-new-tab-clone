@@ -1,25 +1,53 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { SearchEngine } from "../../types";
 import _DEFAULT_ENGINE_LIST from "./DEFAULT_ENGINE_LIST.json";
 
-export const DEFAULT_ENGINE_LIST: SearchEngine[] =
-    _DEFAULT_ENGINE_LIST as SearchEngine[];
+export type BasicIcon = {
+    type: "basic";
+    bgColor: string;
+    bgText: string;
+    bgTextSize: number;
+};
+
+export type ImgIcon = {
+    type: "img";
+    url: string;
+};
+
+export type Icon = BasicIcon | ImgIcon;
+
+export interface BaseSearchEngine {
+    id: string;
+    name: string;
+    icon: Icon;
+    searchUrl: { [key: string]: string } | string;
+}
+
+export interface DefaultSearchEngine extends BaseSearchEngine {
+    description: string;
+    certified: boolean;
+}
+
+export interface CustomizedSearchEngine extends BaseSearchEngine {}
+
+export const DEFAULT_ENGINE_LIST: DefaultSearchEngine[] =
+    _DEFAULT_ENGINE_LIST as DefaultSearchEngine[];
 
 export function getActiveEngines(
-    engineList: SearchEngine[],
+    engineList: BaseSearchEngine[],
     activeEngineIds: string[]
 ) {
     return engineList.filter(e => activeEngineIds.includes(e.id));
 }
 
 type SliceType = {
-    engineList: SearchEngine[];
+    defaultEngines: DefaultSearchEngine[];
+    customizedEngines: CustomizedSearchEngine[];
     activeEngineIds: string[];
-    currentEngine: SearchEngine;
+    currentEngine: BaseSearchEngine;
 };
 
 function initiateSlice(): SliceType {
-    const additionalEngineList: SearchEngine[] = JSON.parse(
+    const additionalEngineList: CustomizedSearchEngine[] = JSON.parse(
         localStorage.getItem("additionalSearchEngines") || "[]"
     );
 
@@ -37,7 +65,8 @@ function initiateSlice(): SliceType {
         DEFAULT_ENGINE_LIST[0];
 
     return {
-        engineList: allEnginesList,
+        defaultEngines: DEFAULT_ENGINE_LIST,
+        customizedEngines: additionalEngineList,
         activeEngineIds,
         currentEngine,
     };
@@ -47,7 +76,7 @@ const searchEngineSlice = createSlice({
     name: "searchEngine",
     initialState: initiateSlice(),
     reducers: {
-        setActiveEngine(state, action: PayloadAction<SearchEngine>) {
+        setActiveEngine(state, action: PayloadAction<BaseSearchEngine>) {
             state.currentEngine = action.payload;
         },
     },

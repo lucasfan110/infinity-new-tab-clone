@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import useAutoComplete from "../../hooks/useAutocomplete";
-import { RootState, setActiveEngine } from "../../store";
-import { SearchEngine } from "../../types";
+import { RootState, BaseSearchEngine, setActiveEngine } from "../../store";
 import AddEngineSidebar from "../AddEngineSidebar";
 import Autocomplete from "./Autocomplete";
 import SearchEngineSelect from "./SearchEngineSelect";
@@ -47,7 +46,7 @@ export default function Search() {
         search(query);
     };
 
-    const handleEngineSelect = (engine: SearchEngine) => {
+    const handleEngineSelect = (engine: BaseSearchEngine) => {
         dispatch(setActiveEngine(engine));
         setShowEngineSwitch(false);
     };

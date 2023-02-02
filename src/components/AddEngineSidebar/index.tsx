@@ -45,7 +45,7 @@ export default function AddEngineSidebar({ show = true, onClose }: Props) {
                     </button>
                 )}
 
-                <Heading size={1} className="m-6">
+                <Heading size={3} className="m-6">
                     Add Search Engine
                 </Heading>
                 <Nav pages={PAGES} />
