@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { getActiveEngines, RootState, BaseSearchEngine } from "../../store";
+import {
+    getActiveEngines,
+    RootState,
+    BaseSearchEngine,
+    DEFAULT_ENGINE_LIST,
+} from "../../store";
 import displayIcon from "../../utils/displayIcon";
 
 interface EngineItemProps {
@@ -34,14 +39,10 @@ export default function SearchEngineSelect({
 }: Props) {
     const activeEnginesList = useSelector(
         ({
-            searchEngine: {
-                defaultEngines,
-                customizedEngines,
-                activeEngineIds,
-            },
+            searchEngine: { customizedEngines, activeEngineIds },
         }: RootState) => {
             return getActiveEngines(
-                [...defaultEngines, ...customizedEngines],
+                [...DEFAULT_ENGINE_LIST, ...customizedEngines],
                 activeEngineIds
             );
         }

@@ -1,6 +1,10 @@
 import classNames from "classnames";
-import { useSelector } from "react-redux";
-import { DefaultSearchEngine, RootState } from "../../store";
+import { useDispatch } from "react-redux";
+import {
+    addActiveEngineId,
+    DefaultSearchEngine,
+    DEFAULT_ENGINE_LIST,
+} from "../../store";
 import Heading from "../Heading";
 
 interface EngineCardProps {
@@ -17,7 +21,10 @@ function EngineCard({ engine, onAdd }: EngineCardProps) {
             <p className="text-sm text-gray-400">{engine.description}</p>
             <div className="flex justify-end mt-4">
                 <button
-                    className={classNames("border px-8 py-1 rounded-lg")}
+                    className={classNames(
+                        "border px-8 py-1 rounded-lg transition",
+                        "hover:bg-gray-200"
+                    )}
                     onClick={() => onAdd?.(engine)}
                 >
                     Add
@@ -28,13 +35,13 @@ function EngineCard({ engine, onAdd }: EngineCardProps) {
 }
 
 export default function DefaultEngines() {
-    const defaultEngineList = useSelector(
-        (state: RootState) => state.searchEngine.defaultEngines
-    );
+    const dispatch = useDispatch();
 
-    const handleAdd = (engine: DefaultSearchEngine) => {};
+    const handleAdd = (engine: DefaultSearchEngine) => {
+        dispatch(addActiveEngineId(engine.id));
+    };
 
-    const renderedList = defaultEngineList.map(engine => {
+    const renderedList = DEFAULT_ENGINE_LIST.map(engine => {
         return (
             <li key={engine.id}>
                 <EngineCard engine={engine} onAdd={handleAdd} />
