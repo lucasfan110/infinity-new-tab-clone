@@ -1,4 +1,4 @@
-import { Icon } from "../types";
+import { Icon } from "../store";
 
 export default function displayIcon(icon: Icon, className: string = "") {
     switch (icon.type) {

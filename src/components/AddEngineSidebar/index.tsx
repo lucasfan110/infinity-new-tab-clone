@@ -29,26 +29,28 @@ export default function AddEngineSidebar({ show = true, onClose }: Props) {
                     "absolute right-0 inset-y-0 bg-white z-20 transition-all",
                     {
                         "w-[50vw]": show,
-                        "w-0": !show,
+                        "w-0 invisible": !show,
                     }
                 )}
                 ref={sidebarRef}
             >
                 {show && (
-                    <button
-                        className="bg-none text-white font-lg border-none cursor-pointer w-10 h-10 absolute right-[50vw] hover:bg-gray-500 transition"
-                        onClick={onClose}
-                    >
-                        <div className="flex items-center justify-center">
-                            <FaTimes />
-                        </div>
-                    </button>
-                )}
+                    <>
+                        <button
+                            className="bg-none text-white font-lg border-none cursor-pointer w-10 h-10 absolute right-[50vw] hover:bg-gray-500 transition"
+                            onClick={onClose}
+                        >
+                            <div className="flex items-center justify-center">
+                                <FaTimes />
+                            </div>
+                        </button>
 
-                <Heading size={3} className="m-6">
-                    Add Search Engine
-                </Heading>
-                <Nav pages={PAGES} />
+                        <Heading size={4} className="m-6">
+                            Add Search Engine
+                        </Heading>
+                        <Nav pages={PAGES} />
+                    </>
+                )}
             </div>
         </>
     );

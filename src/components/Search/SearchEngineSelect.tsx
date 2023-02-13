@@ -15,9 +15,12 @@ interface EngineItemProps {
 
 function EngineItem({ icon, engineName }: EngineItemProps) {
     return (
-        <div className="w-24 h-24 border-r border-gray-200 flex-col cursor-pointer transition hover:bg-gray-200">
+        <div
+            className="w-24 h-24 border-r border-gray-200 flex-col cursor-pointer transition hover:bg-gray-200"
+            title={engineName}
+        >
             <div className="w-full flex justify-center">{icon}</div>
-            <div className="text-sm text-center overflow-hidden whitespace-nowrap text-ellipsis padding-2.5">
+            <div className="text-sm text-center overflow-hidden whitespace-nowrap text-ellipsis px-2.5">
                 {engineName}
             </div>
         </div>

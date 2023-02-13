@@ -32,12 +32,10 @@ export default function Nav({ pages }: Props) {
     const content = Object.values(pages)[activeIndex];
 
     return (
-        <div className="mt-10">
-            <div className="">
-                <ul className="border-gray-200 border-y px-12 py-5">
-                    {renderedPageTitles}
-                </ul>
-            </div>
+        <div>
+            <ul className="border-gray-200 border-y px-12 py-5">
+                {renderedPageTitles}
+            </ul>
             {content}
         </div>
     );
