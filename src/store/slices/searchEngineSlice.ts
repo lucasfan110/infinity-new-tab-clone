@@ -51,6 +51,13 @@ type SliceType = {
     currentEngine: BaseSearchEngine;
 };
 
+export function allEngines(state: SliceType) {
+    return [
+        ...DEFAULT_ENGINE_LIST,
+        state.customizedEngines,
+    ] as BaseSearchEngine[];
+}
+
 function initiateSlice(): SliceType {
     const additionalEngineList: CustomizedSearchEngine[] = JSON.parse(
         localStorage.getItem(ADDITIONAL_ENGINE_KEY) || "[]"
@@ -86,8 +93,24 @@ const searchEngineSlice = createSlice({
         addActiveEngineId(state, action: PayloadAction<string>) {
             state.activeEngineIds.push(action.payload);
         },
+        deleteActiveEngineId(state, action: PayloadAction<string>) {
+            state.activeEngineIds.splice(
+                state.activeEngineIds.findIndex(id => id === action.payload),
+                1
+            );
+        },
+        resetActiveEngine(state, _: PayloadAction<void>) {
+            state.currentEngine = allEngines(state).find(
+                e => e.id === state.activeEngineIds[0]
+            )!;
+        },
     },
 });
 
-export const { setActiveEngine, addActiveEngineId } = searchEngineSlice.actions;
+export const {
+    setActiveEngine,
+    addActiveEngineId,
+    deleteActiveEngineId,
+    resetActiveEngine,
+} = searchEngineSlice.actions;
 export default searchEngineSlice.reducer;

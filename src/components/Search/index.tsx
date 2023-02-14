@@ -1,7 +1,13 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import useAutoComplete from "../../hooks/useAutocomplete";
-import { RootState, BaseSearchEngine, setActiveEngine } from "../../store";
+import {
+    RootState,
+    BaseSearchEngine,
+    setActiveEngine,
+    deleteActiveEngineId,
+    resetActiveEngine,
+} from "../../store";
 import AddEngineSidebar from "../AddEngineSidebar";
 import Autocomplete from "./Autocomplete";
 import SearchEngineSelect from "./SearchEngineSelect";
@@ -37,7 +43,7 @@ export default function Search() {
         }
 
         const url = currentSearchUrl.replace("%s", query);
-        window.open(url, "_black")?.focus();
+        window.open(url, "_blank")?.focus();
         setQuery("");
     };
 
@@ -49,6 +55,11 @@ export default function Search() {
     const handleEngineSelect = (engine: BaseSearchEngine) => {
         dispatch(setActiveEngine(engine));
         setShowEngineSwitch(false);
+    };
+
+    const deleteEngine = (engine: BaseSearchEngine) => {
+        dispatch(deleteActiveEngineId(engine.id));
+        dispatch(resetActiveEngine());
     };
 
     return (
@@ -69,8 +80,9 @@ export default function Search() {
                 <SearchEngineSelect
                     show={showEngineSwitch}
                     onClose={() => setShowEngineSwitch(false)}
-                    onSelect={handleEngineSelect}
-                    onAdd={() => setShowSidebar(true)}
+                    onEngineSelect={handleEngineSelect}
+                    onEngineAdd={() => setShowSidebar(true)}
+                    onEngineDelete={engine => deleteEngine(engine)}
                 />
                 <Autocomplete search={search} />
 
