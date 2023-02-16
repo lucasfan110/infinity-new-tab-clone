@@ -17,54 +17,35 @@
         "isActive": true
     },
     {
-        "name": "Google-Another",
+        "name": "Bing",
         "icon": {
             "type": "img",
-            "url": "https://i.pinimg.com/originals/dd/5d/db/dd5ddbbefebdddd0f0f4308c93371c37.jpg"
+            "url": "https://cdn.vox-cdn.com/thumbor/lw7eaG_tnqPDo-Jy5CVzQ22WyCY=/0x0:660x440/1400x1050/filters:focal(330x220:331x221)/cdn.vox-cdn.com/uploads/chorus_asset/file/21937385/binglogo.jpg"
         },
-        "id": "89b4e228-0f13-4b86-8c83-1d5a3b45ecc0",
+        "id": "bda01e5e-3411-40c9-9430-6887052b7855",
         "searchUrl": {
-            "Web": "https://www.google.com/search?q=%s",
-            "Images": "https://www.google.com/search?tbm=isch&q=%s",
-            "News": "https://www.google.com/search?tbm=nws&q=%s",
-            "Videos": "https://www.google.com/search?tbm=vid&q=%s",
-            "Maps": "https://www.google.com/maps/preview?q=%s"
+            "Web": "https://www.bing.com/search?q=%s",
+            "Images": "https://www.bing.com/images/search?q=%s",
+            "Videos": "https://www.bing.com/videos/search?q=%s",
+            "Maps": "https://www.bing.com/maps?q=%s"
         },
-        "description": "testing purposes",
+        "description": "Bing is a search engine developed by Microsoft. It was launched in 2009 as a replacement for Microsoft's previous search engines, including Live Search, Windows Live Search and MSN Search.",
         "isActive": false
     },
     {
-        "name": "Google-Another-another",
+        "name": "Yahoo",
         "icon": {
             "type": "img",
-            "url": "https://i.pinimg.com/originals/dd/5d/db/dd5ddbbefebdddd0f0f4308c93371c37.jpg"
+            "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Yahoo%21_icon_%282009-2013%29.svg/1200px-Yahoo%21_icon_%282009-2013%29.svg.png"
         },
-        "id": "89b4e228-0f13-4b86-8c83-1d5a3b45eca1",
+        "id": "9ab4c48b-a776-4021-89ac-b1054930a180",
         "searchUrl": {
-            "Web": "https://www.google.com/search?q=%s",
-            "Images": "https://www.google.com/search?tbm=isch&q=%s",
-            "News": "https://www.google.com/search?tbm=nws&q=%s",
-            "Videos": "https://www.google.com/search?tbm=vid&q=%s",
-            "Maps": "https://www.google.com/maps/preview?q=%s"
+            "Web": "https://search.yahoo.com/search?p=%s",
+            "Images": "https://images.search.yahoo.com/search/images?p=%s",
+            "News": "https://news.search.yahoo.com/search?p=%s",
+            "Videos": "https://video.search.yahoo.com/search/video?p=%s"
         },
-        "description": "testing purposes",
-        "isActive": false
-    },
-    {
-        "name": "HAHA",
-        "icon": {
-            "type": "img",
-            "url": "https://i.pinimg.com/originals/dd/5d/db/dd5ddbbefebdddd0f0f4308c93371c37.jpg"
-        },
-        "id": "89b4e228-0f13-4b86-8c83-1d5a3b45ecb1",
-        "searchUrl": {
-            "Web": "https://www.google.com/search?q=%s",
-            "Images": "https://www.google.com/search?tbm=isch&q=%s",
-            "News": "https://www.google.com/search?tbm=nws&q=%s",
-            "Videos": "https://www.google.com/search?tbm=vid&q=%s",
-            "Maps": "https://www.google.com/maps/preview?q=%s"
-        },
-        "description": "testing purposes",
+        "description": "Yahoo is a web services provider that was founded in 1994. It began as a search engine and web portal, but has since expanded to include a wide range of products and services, including email, news, finance, sports, and more.",
         "isActive": false
     }
 ]
