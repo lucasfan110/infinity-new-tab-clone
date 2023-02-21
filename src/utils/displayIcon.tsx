@@ -13,7 +13,7 @@ export default function displayIcon(icon: Icon, className: string = "") {
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
-                        borderRadius: "50%",
+                        borderRadius: "10px",
                     }}
                 >
                     {icon.bgText}
@@ -26,7 +26,7 @@ export default function displayIcon(icon: Icon, className: string = "") {
                     alt="search engine icon"
                     className={className}
                     style={{
-                        borderRadius: "50%",
+                        borderRadius: "10px",
                     }}
                 />
             );

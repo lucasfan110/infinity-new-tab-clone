@@ -9,6 +9,7 @@ import {
 } from "../../store";
 import checkOverflow from "../../utils/checkOverflow";
 import displayIcon from "../../utils/displayIcon";
+import SidebarContainer from "./SidebarContainer";
 
 interface EngineCardProps {
     engine: DefaultSearchEngine;
@@ -99,8 +100,8 @@ export default function DefaultEngines() {
     });
 
     return (
-        <div className="bg-gray-100 border min-h-screen">
-            <ul className="px-8">{renderedList}</ul>
-        </div>
+        <SidebarContainer>
+            <ul>{renderedList}</ul>
+        </SidebarContainer>
     );
 }

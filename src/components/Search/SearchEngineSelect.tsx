@@ -3,10 +3,10 @@ import { useEffect, useState } from "react";
 import { FaTrashAlt } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import {
-    getActiveEngines,
-    RootState,
     BaseSearchEngine,
     DEFAULT_ENGINE_LIST,
+    getActiveEngines,
+    RootState,
 } from "../../store";
 import displayIcon from "../../utils/displayIcon";
 

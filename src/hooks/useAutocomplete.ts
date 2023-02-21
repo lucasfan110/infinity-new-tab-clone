@@ -16,6 +16,11 @@ export default function useAutoComplete(query: string) {
 
         if (!query) {
             autocomplete(null);
+
+            if (timerId.current) {
+                clearTimeout(timerId.current);
+            }
+
             return;
         }
 
