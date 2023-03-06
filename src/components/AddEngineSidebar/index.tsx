@@ -4,6 +4,7 @@ import { FaTimes } from "react-icons/fa";
 import Heading from "../Heading";
 import CustomizeEngine from "./CustomizeEngine";
 import DefaultEngines from "./DefaultEngines";
+import "./index.css";
 import Nav from "./Nav";
 
 const PAGES = {
@@ -28,7 +29,7 @@ export default function AddEngineSidebar({ show = true, onClose }: Props) {
                 className={classNames(
                     "absolute right-0 inset-y-0 bg-white z-20 transition-all",
                     {
-                        "w-[50vw]": show,
+                        "w-[50vw] max-w-[400px]": show,
                         "w-0 invisible": !show,
                     }
                 )}
@@ -37,7 +38,7 @@ export default function AddEngineSidebar({ show = true, onClose }: Props) {
                 {show && (
                     <>
                         <button
-                            className="bg-none text-white font-lg border-none cursor-pointer w-10 h-10 absolute right-[50vw] hover:bg-gray-500 transition"
+                            className="close-button bg-none text-white font-lg border-none cursor-pointer w-10 h-10 absolute hover:bg-gray-500 transition"
                             onClick={onClose}
                         >
                             <div className="flex items-center justify-center">

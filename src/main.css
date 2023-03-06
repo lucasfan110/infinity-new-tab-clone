@@ -17,11 +17,21 @@ body {
     overflow: hidden;
 }
 
-.no-select {
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+::-webkit-scrollbar {
+    width: 4px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+    margin-block: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: hsl(0, 0%, 80%);
+    border-radius: 100vw;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: hsl(0, 0%, 60%);
+    width: 6px;
 }

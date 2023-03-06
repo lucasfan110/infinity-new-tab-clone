@@ -1,5 +1,4 @@
 import classNames from "classnames";
-import { useEffect, useState } from "react";
 import { FaTrashAlt } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import {
@@ -9,6 +8,7 @@ import {
     RootState,
 } from "../../store";
 import displayIcon from "../../utils/displayIcon";
+import Mask from "../Mask";
 
 interface EngineItemProps {
     icon: React.ReactNode;
@@ -82,18 +82,6 @@ export default function SearchEngineSelect({
             );
         }
     );
-    const [backgroundColor, setBackgroundColor] = useState("");
-
-    useEffect(() => {
-        if (!show) {
-            setBackgroundColor("rgba(0, 0, 0, 0)");
-            return;
-        }
-
-        setTimeout(() => {
-            setBackgroundColor("rgba(0, 0, 0, 0.5)");
-        }, 50);
-    }, [show]);
 
     if (!show) {
         return null;
@@ -118,14 +106,15 @@ export default function SearchEngineSelect({
 
     return (
         <>
-            <div className="bg-white z-10 absolute p-0">
+            <Mask show={show} onClick={onClose} />
+            <div className="bg-white absolute p-0">
                 <ul className="flex">
                     {renderedEngineList}
                     <li key="add">
                         <EngineItem
                             icon={
                                 <img
-                                    src="./plus-sign.png"
+                                    src="/images/icons/plus-sign.png"
                                     alt="add"
                                     className="h-12 w-12 mt-4"
                                 />
@@ -136,11 +125,6 @@ export default function SearchEngineSelect({
                     </li>
                 </ul>
             </div>
-            <div
-                className="absolute inset-0 transition duration-500"
-                style={{ backgroundColor }}
-                onClick={onClose}
-            />
         </>
     );
 }

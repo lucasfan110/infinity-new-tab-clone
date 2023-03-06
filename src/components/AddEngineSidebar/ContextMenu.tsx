@@ -1,20 +1,21 @@
-interface Props extends React.ComponentPropsWithRef<"div"> {
+import { forwardRef } from "react";
+
+interface Props extends React.ComponentPropsWithoutRef<"div"> {
     show?: boolean;
 }
+export type Ref = HTMLDivElement;
 
-export default function ContextMenu({
-    show = false,
-    className,
-    ...props
-}: Props) {
+const ContextMenu = forwardRef<Ref, Props>(({ show }, ref) => {
     if (!show) {
         return null;
     }
 
     return (
         <div
-            className={`absolute border mt-8 bg-white shadow w-24 ${className}`}
-            {...props}
-        ></div>
+            className={`absolute border mt-8 bg-white shadow w-24`}
+            ref={ref}
+        />
     );
-}
+});
+
+export default ContextMenu;
