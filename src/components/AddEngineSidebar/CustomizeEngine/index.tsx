@@ -3,8 +3,8 @@ import {
     addActiveEngineId,
     CustomizedSearchEngine,
     RootState,
-} from "../../store";
-import SidebarContainer from "./SidebarContainer";
+} from "../../../store";
+import SidebarContainer from "../SidebarContainer";
 import { useState } from "react";
 import UpsertEngine from "./UpsertEngine";
 import CustomEngineCard from "./CustomEngineCard";
@@ -34,6 +34,7 @@ export default function CustomizeEngine() {
                     engine={e}
                     isAdded={isAdded}
                     onAdd={handleAdd}
+                    onEdit={() => setShowEngineUpserting(true)}
                 />
             </li>
         );
@@ -46,7 +47,6 @@ export default function CustomizeEngine() {
             ) : (
                 <ul className="mt-4">{renderedCustomizedEngine}</ul>
             )}
-            <UpsertEngine />
         </SidebarContainer>
     );
 }

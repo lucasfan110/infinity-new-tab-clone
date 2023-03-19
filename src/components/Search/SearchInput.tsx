@@ -1,7 +1,7 @@
 import { FaCaretDown, FaSearch } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
-import displayIcon from "../../utils/displayIcon";
+import DisplayIcon from "../../utils/DisplayIcon";
 
 interface Props {
     query: string;
@@ -20,7 +20,9 @@ export default function SearchInput({
         (state: RootState) => state.searchEngine
     );
 
-    const icon = displayIcon(engine.icon, "inline-block w-9 h-9 mx-1");
+    const icon = (
+        <DisplayIcon icon={engine.icon} className="inline-block w-9 h-9 mx-1" />
+    );
 
     const handleIconSwitch = () => {
         setShowEngineSwitch(true);

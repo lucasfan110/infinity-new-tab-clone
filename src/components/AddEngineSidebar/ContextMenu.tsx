@@ -5,7 +5,7 @@ interface Props extends React.ComponentPropsWithoutRef<"div"> {
 }
 export type Ref = HTMLDivElement;
 
-const ContextMenu = forwardRef<Ref, Props>(({ show }, ref) => {
+const ContextMenu = forwardRef<Ref, Props>(({ show, ...props }, ref) => {
     if (!show) {
         return null;
     }
@@ -14,6 +14,7 @@ const ContextMenu = forwardRef<Ref, Props>(({ show }, ref) => {
         <div
             className={`absolute border mt-8 bg-white shadow w-24`}
             ref={ref}
+            {...props}
         />
     );
 });

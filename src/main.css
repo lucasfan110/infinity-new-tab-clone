@@ -35,3 +35,25 @@ body {
     background: hsl(0, 0%, 60%);
     width: 6px;
 }
+
+input[type="range"] {
+    appearance: none;
+    outline: none;
+    cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+    background-color: #333;
+    height: 2px;
+    border-radius: 2px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    appearance: none;
+    background-color: white;
+    border: 2px solid #333;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-top: -10px;
+}

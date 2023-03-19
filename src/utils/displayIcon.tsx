@@ -1,6 +1,11 @@
 import { Icon } from "../store";
 
-export default function displayIcon(icon: Icon, className: string = "") {
+interface Props {
+    icon: Icon;
+    className?: string;
+}
+
+export default function DisplayIcon({ icon, className = "" }: Props) {
     switch (icon.type) {
         case "basic":
             return (

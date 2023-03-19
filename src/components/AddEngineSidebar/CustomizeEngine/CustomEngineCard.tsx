@@ -1,11 +1,11 @@
 import classNames from "classnames";
 import { useEffect, useRef, useState } from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
-import { CustomizedSearchEngine } from "../../store";
-import displayIcon from "../../utils/displayIcon";
-import Heading from "../Heading";
-import ContextMenu from "./ContextMenu";
-import ContextMenuItem from "./ContextMenuItem";
+import { CustomizedSearchEngine } from "../../../store";
+import DisplayIcon from "../../../utils/DisplayIcon";
+import Heading from "../../Heading";
+import ContextMenu from "../ContextMenu";
+import ContextMenuItem from "../ContextMenuItem";
 
 interface Props {
     engine: CustomizedSearchEngine;
@@ -69,7 +69,7 @@ export default function CustomEngineCard({
 
     return (
         <div className="flex bg-white h-24 items-center rounded group no-select">
-            {displayIcon(engine.icon, "w-16 h-16 ml-4")}
+            <DisplayIcon icon={engine.icon} className="w-16 h-16 ml-4" />
 
             <div className="ml-4 grow">
                 <Heading size={6}>{engine.name}</Heading>

@@ -13,22 +13,21 @@ export default function Mask({
     const [backgroundColor, setBackgroundColor] = useState("rgba(0, 0, 0, 0)");
 
     useEffect(() => {
-        setTimeout(() => {
-            if (!show) {
-                setBackgroundColor("rgba(0, 0, 0, 0)");
-                return;
-            }
+        if (!show) {
+            setBackgroundColor("rgba(0, 0, 0, 0)");
+            return;
+        }
 
-            setTimeout(() => {
-                setBackgroundColor("rgba(0, 0, 0, 0.5)");
-            }, 50);
-        }, 50);
+        setBackgroundColor("rgba(0, 0, 0, 0.5)");
     }, [show]);
 
     return (
         <div
             className={`fixed inset-0 transition duration-500 ${className}`}
-            style={{ backgroundColor, ...style }}
+            style={{
+                backgroundColor,
+                ...style,
+            }}
             {...props}
         />
     );

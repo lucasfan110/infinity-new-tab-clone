@@ -7,7 +7,7 @@ import {
     getActiveEngines,
     RootState,
 } from "../../store";
-import displayIcon from "../../utils/displayIcon";
+import DisplayIcon from "../../utils/DisplayIcon";
 import Mask from "../Mask";
 
 interface EngineItemProps {
@@ -88,7 +88,9 @@ export default function SearchEngineSelect({
     }
 
     const renderedEngineList = activeEnginesList.map(engine => {
-        const icon = displayIcon(engine.icon, "w-12 h-12 mt-4");
+        const icon = (
+            <DisplayIcon icon={engine.icon} className="w-12 h-12 mt-4" />
+        );
         const showDelete = activeEnginesList.length > 1;
 
         return (
