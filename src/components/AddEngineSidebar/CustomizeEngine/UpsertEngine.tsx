@@ -3,21 +3,9 @@ import { FaPlus, FaRegQuestionCircle } from "react-icons/fa";
 import { CustomizedSearchEngine } from "../../../store";
 import DisplayIcon from "../../../utils/DisplayIcon";
 import Input from "../../Forms/Input";
-import Range from "../../Forms/Range";
 import TextArea from "../../Forms/TextArea";
 import CustomEngineHowTo from "./CustomEngineHowTo";
-import TextBubble from "./TextBubble";
-
-const COLORS = [
-    "rgb(255 71 52)",
-    "rgb(255 122 9)",
-    "rgb(255 207 12)",
-    "rgb(42 233 121)",
-    "rgb(44 213 223)",
-    "rgb(0 116 255)",
-    "rgb(109 9 255)",
-    "rgb(255 36 160)",
-];
+import SolidIconCreator, { COLORS } from "./SolidIconCreator";
 
 interface Props {
     defaultEngine?: CustomizedSearchEngine;
@@ -25,24 +13,18 @@ interface Props {
 }
 
 export default function UpsertEngine({ defaultEngine, onSubmit }: Props) {
+    const [showHowTo, setShowHowTo] = useState(false);
+    const [engineName, setEngineName] = useState("");
+    const substringLength = engineName.length === 3 ? 3 : 2;
+    const [iconColor, setIconColor] = useState(COLORS[0]);
+
     const handleSubmit = () => {
         onSubmit?.();
     };
 
-    const [showHowTo, setShowHowTo] = useState(false);
-    const [engineName, setEngineName] = useState("");
-    const substringLength = engineName.length === 3 ? 3 : 2;
-
-    const renderedColorPickers = COLORS.map(c => (
-        <DisplayIcon
-            icon={{ bgColor: c, bgText: "", bgTextSize: 0, type: "basic" }}
-            className="w-5 h-5 cursor-pointer mr-2"
-        />
-    ));
-
     return (
         <>
-            <form onSubmit={handleSubmit} className="bg-white px-4 py-2 mt-6">
+            <form onSubmit={handleSubmit} className="bg-white px-5 py-6 mt-6">
                 <label htmlFor="engine-name">Search Engine</label>
                 <Input
                     id="engine-name"
@@ -71,7 +53,7 @@ export default function UpsertEngine({ defaultEngine, onSubmit }: Props) {
                         <DisplayIcon
                             icon={{
                                 type: "basic",
-                                bgColor: "red",
+                                bgColor: iconColor,
                                 bgText: engineName.substring(
                                     0,
                                     substringLength
@@ -94,26 +76,10 @@ export default function UpsertEngine({ defaultEngine, onSubmit }: Props) {
                     </button>
                 </div>
 
-                <TextBubble>
-                    <label htmlFor="display-name" className="mb-2">
-                        Icon Text
-                    </label>
-                    <Input placeholder="Display name" id="display-name" />
-
-                    <label htmlFor="text-size" className="mb-2">
-                        Text Size
-                    </label>
-                    <Range
-                        min={14}
-                        max={74}
-                        defaultValue={30}
-                        className="w-full my-2"
-                        id="text-size"
-                    />
-
-                    <label>Color</label>
-                    <div className="mt-2 flex">{renderedColorPickers}</div>
-                </TextBubble>
+                <SolidIconCreator
+                    color={iconColor}
+                    onColorChange={setIconColor}
+                />
             </form>
 
             <CustomEngineHowTo

@@ -10,7 +10,7 @@ export const SEARCH_ENGINE_SLICE_NAME = "searchEngine";
 export type BasicIcon = {
     type: "basic";
     bgColor: string;
-    bgText: string;
+    bgText: React.ReactNode;
     bgTextSize: number;
 };
 

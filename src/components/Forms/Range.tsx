@@ -29,7 +29,6 @@ export default function Range({
                 min={min}
                 max={max}
                 step={step}
-                defaultValue={defaultValue}
                 id={id}
             />
             <span className="ml-3">{value}</span>
