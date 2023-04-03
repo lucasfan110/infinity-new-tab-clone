@@ -10,15 +10,10 @@ export default function DisplayIcon({ icon, className = "" }: Props) {
         case "basic":
             return (
                 <span
-                    className={className}
+                    className={`text-white flex items-center justify-center rounded-lg truncate ${className}`}
                     style={{
                         backgroundColor: icon.bgColor,
                         fontSize: icon.bgTextSize,
-                        color: "white",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        borderRadius: "10px",
                     }}
                 >
                     {icon.bgText}

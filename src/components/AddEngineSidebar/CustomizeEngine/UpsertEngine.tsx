@@ -5,7 +5,10 @@ import DisplayIcon from "../../../utils/DisplayIcon";
 import Input from "../../Forms/Input";
 import TextArea from "../../Forms/TextArea";
 import CustomEngineHowTo from "./CustomEngineHowTo";
-import SolidIconCreator, { COLORS } from "./SolidIconCreator";
+import SolidIconCreator, {
+    COLORS,
+    DEFAULT_TEXT_SIZE,
+} from "./SolidIconCreator";
 
 interface Props {
     defaultEngine?: CustomizedSearchEngine;
@@ -14,9 +17,14 @@ interface Props {
 
 export default function UpsertEngine({ defaultEngine, onSubmit }: Props) {
     const [showHowTo, setShowHowTo] = useState(false);
+
     const [engineName, setEngineName] = useState("");
     const substringLength = engineName.length === 3 ? 3 : 2;
+    const iconNameFromEngineName = engineName.substring(0, substringLength);
+
     const [iconColor, setIconColor] = useState(COLORS[0]);
+    const [iconTextSize, setIconTextSize] = useState(DEFAULT_TEXT_SIZE);
+    const [iconName, setIconName] = useState<string | null>(null);
 
     const handleSubmit = () => {
         onSubmit?.();
@@ -54,11 +62,8 @@ export default function UpsertEngine({ defaultEngine, onSubmit }: Props) {
                             icon={{
                                 type: "basic",
                                 bgColor: iconColor,
-                                bgText: engineName.substring(
-                                    0,
-                                    substringLength
-                                ),
-                                bgTextSize: 16,
+                                bgText: iconName ?? iconNameFromEngineName,
+                                bgTextSize: iconTextSize,
                             }}
                             className="w-full h-full"
                         />
@@ -79,6 +84,10 @@ export default function UpsertEngine({ defaultEngine, onSubmit }: Props) {
                 <SolidIconCreator
                     color={iconColor}
                     onColorChange={setIconColor}
+                    textSize={iconTextSize}
+                    onTextSizeChange={setIconTextSize}
+                    iconText={iconName ?? ""}
+                    onIconTextChange={setIconName}
                 />
             </form>
 

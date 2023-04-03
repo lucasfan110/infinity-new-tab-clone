@@ -14,6 +14,8 @@ interface Props {
     onColorChange(value: string): void;
 }
 
+export const DEFAULT_TEXT_SIZE = 30;
+
 export const COLORS = [
     "#ff4734",
     "#ff7c09",
@@ -102,7 +104,12 @@ export default function SolidIconCreator({
             <label htmlFor="display-name" className="mb-2">
                 Icon Text
             </label>
-            <Input placeholder="Display name" id="display-name" />
+            <Input
+                placeholder="Display name"
+                id="display-name"
+                value={iconText}
+                onChange={e => onIconTextChange(e.target.value)}
+            />
 
             <label htmlFor="text-size" className="mb-2">
                 Text Size
@@ -110,7 +117,8 @@ export default function SolidIconCreator({
             <Range
                 min={14}
                 max={74}
-                defaultValue={30}
+                value={textSize}
+                onChange={e => onTextSizeChange(e.target.valueAsNumber)}
                 className="w-full my-2"
                 id="text-size"
             />
