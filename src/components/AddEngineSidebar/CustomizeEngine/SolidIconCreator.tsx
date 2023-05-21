@@ -1,17 +1,14 @@
 import { useState } from "react";
+import { FaCheck } from "react-icons/fa";
 import DisplayIcon from "../../../utils/DisplayIcon";
 import Input from "../../Forms/Input";
 import Range from "../../Forms/Range";
 import TextBubble from "./TextBubble";
-import { FaCheck } from "react-icons/fa";
+import { BasicIcon } from "../../../store";
 
 interface Props {
-    iconText: string;
-    onIconTextChange(value: string): void;
-    textSize: number;
-    onTextSizeChange(value: number): void;
-    color: string;
-    onColorChange(value: string): void;
+    icon: BasicIcon;
+    onIconChange?(value: BasicIcon): void;
 }
 
 export const DEFAULT_TEXT_SIZE = 30;
@@ -32,29 +29,25 @@ type ColorSelected = {
     color: string;
 };
 
-export default function SolidIconCreator({
-    iconText,
-    onIconTextChange,
-    textSize,
-    onTextSizeChange,
-    color,
-    onColorChange,
-}: Props) {
-    const [colorSelected, setColorSelected] = useState<ColorSelected>({
-        type: "default",
-        color,
-    });
+export default function SolidIconCreator({ icon, onIconChange }: Props) {
+    const defaultColor: ColorSelected = {
+        type: COLORS.includes(icon.bgColor) ? "default" : "custom",
+        color: icon.bgColor,
+    };
+
+    const [colorSelected, setColorSelected] =
+        useState<ColorSelected>(defaultColor);
 
     const handleColorSelect = (color: string) => {
         setColorSelected({ type: "default", color });
-        onColorChange(color);
+        onIconChange?.({ ...icon, bgColor: color });
     };
 
     const handleColorPick = (event: React.ChangeEvent<HTMLInputElement>) => {
         const color = event.target.value;
 
         setColorSelected({ type: "custom", color });
-        onColorChange(color);
+        onIconChange?.({ ...icon, bgColor: color });
     };
 
     const renderedColorPickers = COLORS.map(c => {
@@ -66,14 +59,14 @@ export default function SolidIconCreator({
                 <DisplayIcon
                     icon={{
                         bgColor: c,
-                        bgText: isSelected && (
-                            <FaCheck className="w-full h-full" />
-                        ),
+                        bgText: "",
                         bgTextSize: 0,
                         type: "basic",
                     }}
                     className="w-5 h-5 cursor-pointer mr-2 p-1"
-                />
+                >
+                    {isSelected && <FaCheck className="w-full h-full" />}
+                </DisplayIcon>
             </button>
         );
     });
@@ -107,8 +100,10 @@ export default function SolidIconCreator({
             <Input
                 placeholder="Display name"
                 id="display-name"
-                value={iconText}
-                onChange={e => onIconTextChange(e.target.value)}
+                value={icon.bgText}
+                onChange={e =>
+                    onIconChange?.({ ...icon, bgText: e.target.value })
+                }
             />
 
             <label htmlFor="text-size" className="mb-2">
@@ -117,8 +112,13 @@ export default function SolidIconCreator({
             <Range
                 min={14}
                 max={74}
-                value={textSize}
-                onChange={e => onTextSizeChange(e.target.valueAsNumber)}
+                value={icon.bgTextSize}
+                onChange={e =>
+                    onIconChange?.({
+                        ...icon,
+                        bgTextSize: e.target.valueAsNumber,
+                    })
+                }
                 className="w-full my-2"
                 id="text-size"
             />

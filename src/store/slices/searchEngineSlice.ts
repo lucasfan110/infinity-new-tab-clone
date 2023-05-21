@@ -10,7 +10,7 @@ export const SEARCH_ENGINE_SLICE_NAME = "searchEngine";
 export type BasicIcon = {
     type: "basic";
     bgColor: string;
-    bgText: React.ReactNode;
+    bgText: string;
     bgTextSize: number;
 };
 
@@ -33,7 +33,9 @@ export interface DefaultSearchEngine extends BaseSearchEngine {
     isActive: boolean;
 }
 
-export interface CustomizedSearchEngine extends BaseSearchEngine {}
+export interface CustomizedSearchEngine extends BaseSearchEngine {
+    searchUrl: string;
+}
 
 export const DEFAULT_ENGINE_LIST: DefaultSearchEngine[] =
     _DEFAULT_ENGINE_LIST as DefaultSearchEngine[];

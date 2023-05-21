@@ -16,9 +16,26 @@ export default function CustomizeEngine() {
     const dispatch = useDispatch();
 
     const [showEngineUpserting, setShowEngineUpserting] = useState(false);
+    const [upsertEngElem, setUpsertEngElem] = useState<React.ReactNode>(<></>);
 
     const handleAdd = (engine: CustomizedSearchEngine) => {
         dispatch(addActiveEngineId(engine.id));
+    };
+
+    const handleEdit = (engine: CustomizedSearchEngine) => {
+        const handleSubmit = (newEngine: CustomizedSearchEngine) => {
+            console.log(newEngine);
+            console.log(engine);
+        };
+
+        setShowEngineUpserting(true);
+        setUpsertEngElem(
+            <UpsertEngine
+                onCancel={() => setShowEngineUpserting(false)}
+                defaultEngine={engine}
+                onSubmit={handleSubmit}
+            />
+        );
     };
 
     const renderedCustomizedEngine = customizedEngines.map(e => {
@@ -34,7 +51,7 @@ export default function CustomizeEngine() {
                     engine={e}
                     isAdded={isAdded}
                     onAdd={handleAdd}
-                    onEdit={() => setShowEngineUpserting(true)}
+                    onEdit={handleEdit}
                 />
             </li>
         );
@@ -43,7 +60,7 @@ export default function CustomizeEngine() {
     return (
         <SidebarContainer>
             {showEngineUpserting ? (
-                <UpsertEngine />
+                upsertEngElem
             ) : (
                 <ul className="mt-4">{renderedCustomizedEngine}</ul>
             )}

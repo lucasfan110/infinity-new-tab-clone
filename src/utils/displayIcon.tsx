@@ -3,9 +3,10 @@ import { Icon } from "../store";
 interface Props {
     icon: Icon;
     className?: string;
+    children?: React.ReactNode;
 }
 
-export default function DisplayIcon({ icon, className = "" }: Props) {
+export default function DisplayIcon({ icon, className = "", children }: Props) {
     switch (icon.type) {
         case "basic":
             return (
@@ -17,6 +18,7 @@ export default function DisplayIcon({ icon, className = "" }: Props) {
                     }}
                 >
                     {icon.bgText}
+                    {children}
                 </span>
             );
         case "img":
