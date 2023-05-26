@@ -6,6 +6,7 @@ import Input from "../../Forms/Input";
 import TextArea from "../../Forms/TextArea";
 import CustomEngineHowTo from "./CustomEngineHowTo";
 import SolidIconCreator, { DEFAULT_TEXT_SIZE } from "./SolidIconCreator";
+import { v4 as uuidv4 } from "uuid";
 
 interface Props {
     defaultEngine?: CustomizedSearchEngine;
@@ -20,7 +21,7 @@ function engineNameToBgText(engineName: string): string {
 
 export default function UpsertEngine({
     defaultEngine = {
-        id: "// TODO",
+        id: uuidv4(),
         name: "",
         searchUrl: "",
         icon: {
@@ -44,7 +45,7 @@ export default function UpsertEngine({
 
         onSubmit?.({
             icon,
-            id: defaultEngine?.id ?? "// TODO",
+            id: defaultEngine.id,
             name: engineName,
             searchUrl,
         });
