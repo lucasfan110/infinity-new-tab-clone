@@ -13,6 +13,11 @@ interface Props {
     onCancel?(): void;
 }
 
+function engineNameToBgText(engineName: string): string {
+    const substringLength = engineName.length === 3 ? 3 : 2;
+    return engineName.substring(0, substringLength);
+}
+
 export default function UpsertEngine({
     defaultEngine = {
         id: "// TODO",
@@ -29,13 +34,9 @@ export default function UpsertEngine({
     onCancel,
 }: Props) {
     const [showHowTo, setShowHowTo] = useState(false);
-
     const [engineName, setEngineName] = useState(defaultEngine.name);
-    const substringLength = engineName.length === 3 ? 3 : 2;
-    const iconNameFromEngineName = engineName.substring(0, substringLength);
-
+    const [useDefaultBgText, setUseDefaultBgText] = useState(true);
     const [searchUrl, setSearchUrl] = useState(defaultEngine.searchUrl);
-
     const [icon, setIcon] = useState<Icon>(defaultEngine.icon);
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -49,6 +50,13 @@ export default function UpsertEngine({
         });
     };
 
+    const handleEngineNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setEngineName(e.target.value);
+        if (useDefaultBgText && icon.type === "basic") {
+            setIcon({ ...icon, bgText: engineNameToBgText(e.target.value) });
+        }
+    };
+
     return (
         <>
             <form onSubmit={handleSubmit} className="bg-white px-5 py-6 mt-6">
@@ -58,7 +66,7 @@ export default function UpsertEngine({
                     name="engine-name"
                     placeholder="Name"
                     value={engineName}
-                    onChange={e => setEngineName(e.target.value)}
+                    onChange={handleEngineNameChange}
                 />
 
                 <label htmlFor="url" className="flex items-center">
@@ -102,6 +110,7 @@ export default function UpsertEngine({
                     <SolidIconCreator
                         icon={icon}
                         onIconChange={icon => setIcon(icon)}
+                        onIconTextChange={() => setUseDefaultBgText(false)}
                     />
                 )}
 

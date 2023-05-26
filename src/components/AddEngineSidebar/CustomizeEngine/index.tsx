@@ -32,7 +32,7 @@ export default function CustomizeEngine() {
         setUpsertEngElem(
             <UpsertEngine
                 onCancel={() => setShowEngineUpserting(false)}
-                defaultEngine={engine}
+                // defaultEngine={engine}
                 onSubmit={handleSubmit}
             />
         );

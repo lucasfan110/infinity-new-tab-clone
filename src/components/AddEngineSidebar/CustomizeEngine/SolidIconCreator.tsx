@@ -9,6 +9,12 @@ import { BasicIcon } from "../../../store";
 interface Props {
     icon: BasicIcon;
     onIconChange?(value: BasicIcon): void;
+    /**
+     * This is used for when the icon text change then the
+     * icon's background text will be dependent on the icon text input
+     * instead of the search engine input
+     */
+    onIconTextChange?(value: string): void;
 }
 
 export const DEFAULT_TEXT_SIZE = 30;
@@ -29,7 +35,11 @@ type ColorSelected = {
     color: string;
 };
 
-export default function SolidIconCreator({ icon, onIconChange }: Props) {
+export default function SolidIconCreator({
+    icon,
+    onIconChange,
+    onIconTextChange,
+}: Props) {
     const defaultColor: ColorSelected = {
         type: COLORS.includes(icon.bgColor) ? "default" : "custom",
         color: icon.bgColor,
@@ -48,6 +58,11 @@ export default function SolidIconCreator({ icon, onIconChange }: Props) {
 
         setColorSelected({ type: "custom", color });
         onIconChange?.({ ...icon, bgColor: color });
+    };
+
+    const handleIconTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        onIconChange?.({ ...icon, bgText: e.target.value });
+        onIconTextChange?.(e.target.value);
     };
 
     const renderedColorPickers = COLORS.map(c => {
@@ -101,9 +116,7 @@ export default function SolidIconCreator({ icon, onIconChange }: Props) {
                 placeholder="Display name"
                 id="display-name"
                 value={icon.bgText}
-                onChange={e =>
-                    onIconChange?.({ ...icon, bgText: e.target.value })
-                }
+                onChange={handleIconTextChange}
             />
 
             <label htmlFor="text-size" className="mb-2">
