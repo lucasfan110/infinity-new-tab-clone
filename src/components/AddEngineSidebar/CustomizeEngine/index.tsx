@@ -3,6 +3,7 @@ import {
     addActiveEngineId,
     CustomizedSearchEngine,
     RootState,
+    updateCustomEngine,
 } from "../../../store";
 import SidebarContainer from "../SidebarContainer";
 import { useState } from "react";
@@ -24,8 +25,8 @@ export default function CustomizeEngine() {
 
     const handleEdit = (engine: CustomizedSearchEngine) => {
         const handleSubmit = (newEngine: CustomizedSearchEngine) => {
-            console.log(newEngine);
-            console.log(engine);
+            dispatch(updateCustomEngine(newEngine));
+            setShowEngineUpserting(false);
         };
 
         setShowEngineUpserting(true);

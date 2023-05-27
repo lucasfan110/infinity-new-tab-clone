@@ -106,6 +106,18 @@ const searchEngineSlice = createSlice({
                 e => e.id === state.activeEngineIds[0]
             )!;
         },
+        updateCustomEngine(
+            state,
+            newEngine: PayloadAction<CustomizedSearchEngine>
+        ) {
+            const { customizedEngines } = state;
+
+            const index = customizedEngines.findIndex(
+                engine => engine.id === newEngine.payload.id
+            );
+
+            customizedEngines[index] = newEngine.payload;
+        },
     },
 });
 
@@ -114,5 +126,6 @@ export const {
     addActiveEngineId,
     deleteActiveEngineId,
     resetActiveEngine,
+    updateCustomEngine,
 } = searchEngineSlice.actions;
 export default searchEngineSlice.reducer;

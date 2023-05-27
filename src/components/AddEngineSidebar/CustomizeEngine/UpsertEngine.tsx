@@ -36,7 +36,9 @@ export default function UpsertEngine({
 }: Props) {
     const [showHowTo, setShowHowTo] = useState(false);
     const [engineName, setEngineName] = useState(defaultEngine.name);
-    const [useDefaultBgText, setUseDefaultBgText] = useState(true);
+    const hasBgText =
+        defaultEngine.icon.type === "basic" && defaultEngine.icon.bgText !== "";
+    const [useDefaultBgText, setUseDefaultBgText] = useState(!hasBgText);
     const [searchUrl, setSearchUrl] = useState(defaultEngine.searchUrl);
     const [icon, setIcon] = useState<Icon>(defaultEngine.icon);
 
