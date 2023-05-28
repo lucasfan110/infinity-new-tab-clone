@@ -117,6 +117,10 @@ const searchEngineSlice = createSlice({
             );
 
             customizedEngines[index] = newEngine.payload;
+
+            if (newEngine.payload.id === state.currentEngine.id) {
+                state.currentEngine = newEngine.payload;
+            }
         },
     },
 });

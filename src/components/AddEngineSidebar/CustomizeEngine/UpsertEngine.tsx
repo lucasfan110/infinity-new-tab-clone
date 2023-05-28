@@ -93,7 +93,7 @@ export default function UpsertEngine({
                 <label htmlFor="select-icon">Select Icon</label>
 
                 <div className="flex items-center mb-8">
-                    <div className="w-16 h-16 my-2 shadow-2xl">
+                    <div className="w-14 h-14 my-2 shadow-2xl">
                         <DisplayIcon icon={icon} className="w-full h-full" />
                         <p className="text-xs">Solid color icon</p>
                     </div>

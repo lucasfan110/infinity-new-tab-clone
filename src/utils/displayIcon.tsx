@@ -10,16 +10,25 @@ export default function DisplayIcon({ icon, className = "", children }: Props) {
     switch (icon.type) {
         case "basic":
             return (
-                <span
-                    className={`text-white flex items-center justify-center rounded-lg truncate ${className}`}
+                <svg
+                    className={`rounded-lg ${className}`}
+                    viewBox="0,0,90,90"
                     style={{
                         backgroundColor: icon.bgColor,
-                        fontSize: icon.bgTextSize,
                     }}
                 >
-                    {icon.bgText}
-                    {children}
-                </span>
+                    <foreignObject className="w-full h-full">
+                        <span
+                            className={`text-white flex shrink-0 items-center justify-center truncate w-full h-full`}
+                            style={{
+                                fontSize: icon.bgTextSize,
+                            }}
+                        >
+                            {icon.bgText}
+                            {children}
+                        </span>
+                    </foreignObject>
+                </svg>
             );
         case "img":
             return (

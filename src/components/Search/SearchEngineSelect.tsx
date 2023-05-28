@@ -1,5 +1,3 @@
-import classNames from "classnames";
-import { FaTrashAlt } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import {
     BaseSearchEngine,
@@ -9,53 +7,7 @@ import {
 } from "../../store";
 import DisplayIcon from "../../utils/DisplayIcon";
 import Mask from "../Mask";
-
-interface EngineItemProps {
-    icon: React.ReactNode;
-    engineName: string;
-    onSelect?(): void;
-    showDelete?: boolean;
-    onDelete?(): void;
-}
-
-function EngineItem({
-    icon,
-    engineName,
-    onSelect,
-    onDelete,
-    showDelete = false,
-}: EngineItemProps) {
-    const onButtonClick = (
-        event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-    ) => {
-        event.stopPropagation();
-        onDelete?.();
-    };
-
-    return (
-        <div
-            className="w-24 h-24 border-r border-gray-200 flex-col cursor-pointer transition hover:bg-gray-200 relative group select-none"
-            title={engineName}
-            onClick={onSelect}
-        >
-            {showDelete && (
-                <button
-                    className={classNames(
-                        "invisible absolute top-0 right-0 pb-3 pl-3 pt-1 pr-1 transition rounded-bl-full ",
-                        "group-hover:visible group-hover:bg-gray-300"
-                    )}
-                    onClick={onButtonClick}
-                >
-                    <FaTrashAlt className="text-gray-500 w-4 h-4" />
-                </button>
-            )}
-            <div className="w-full flex justify-center">{icon}</div>
-            <div className="text-sm text-center overflow-hidden whitespace-nowrap text-ellipsis px-2.5">
-                {engineName}
-            </div>
-        </div>
-    );
-}
+import EngineItem from "./EngineItemProps";
 
 interface Props {
     show?: boolean;
