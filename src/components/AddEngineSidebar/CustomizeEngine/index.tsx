@@ -1,7 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 import {
     addActiveEngineId,
+    addCustomEngine,
     CustomizedSearchEngine,
+    deleteCustomEngine,
     RootState,
     updateCustomEngine,
 } from "../../../store";
@@ -9,6 +11,7 @@ import SidebarContainer from "../SidebarContainer";
 import { useState } from "react";
 import UpsertEngine from "./UpsertEngine";
 import CustomEngineCard from "./CustomEngineCard";
+import { FaPlus } from "react-icons/fa";
 
 export default function CustomizeEngine() {
     const { customizedEngines, activeEngineIds } = useSelector(
@@ -16,27 +19,45 @@ export default function CustomizeEngine() {
     );
     const dispatch = useDispatch();
 
-    const [showEngineUpserting, setShowEngineUpserting] = useState(false);
-    const [upsertEngElem, setUpsertEngElem] = useState<React.ReactNode>(<></>);
+    const [upsertEngElem, setUpsertEngElem] = useState<React.ReactNode | null>(
+        null
+    );
 
-    const handleAdd = (engine: CustomizedSearchEngine) => {
+    const handleAddActiveId = (engine: CustomizedSearchEngine) => {
         dispatch(addActiveEngineId(engine.id));
     };
 
     const handleEdit = (engine: CustomizedSearchEngine) => {
         const handleSubmit = (newEngine: CustomizedSearchEngine) => {
             dispatch(updateCustomEngine(newEngine));
-            setShowEngineUpserting(false);
+            setUpsertEngElem(null);
         };
 
-        setShowEngineUpserting(true);
         setUpsertEngElem(
             <UpsertEngine
-                onCancel={() => setShowEngineUpserting(false)}
+                onCancel={() => setUpsertEngElem(null)}
                 defaultEngine={engine}
                 onSubmit={handleSubmit}
             />
         );
+    };
+
+    const handleAddEngine = () => {
+        const handleAdd = (engine: CustomizedSearchEngine) => {
+            dispatch(addCustomEngine(engine));
+            setUpsertEngElem(null);
+        };
+
+        setUpsertEngElem(
+            <UpsertEngine
+                onCancel={() => setUpsertEngElem(null)}
+                onSubmit={handleAdd}
+            />
+        );
+    };
+
+    const handleDelete = (engine: CustomizedSearchEngine) => {
+        dispatch(deleteCustomEngine(engine));
     };
 
     const renderedCustomizedEngine = customizedEngines.map(e => {
@@ -51,8 +72,9 @@ export default function CustomizeEngine() {
                 <CustomEngineCard
                     engine={e}
                     isAdded={isAdded}
-                    onAdd={handleAdd}
+                    onAdd={handleAddActiveId}
                     onEdit={handleEdit}
+                    onDelete={handleDelete}
                 />
             </li>
         );
@@ -60,11 +82,24 @@ export default function CustomizeEngine() {
 
     return (
         <SidebarContainer>
-            {showEngineUpserting ? (
-                upsertEngElem
-            ) : (
-                <ul className="mt-4">{renderedCustomizedEngine}</ul>
-            )}
+            {(() => {
+                if (upsertEngElem !== null) {
+                    return upsertEngElem;
+                }
+
+                return (
+                    <>
+                        <ul className="mt-4">{renderedCustomizedEngine}</ul>
+                        <button
+                            className="flex items-center justify-center w-full bg-white h-12 mt-6 rounded text-sm"
+                            onClick={handleAddEngine}
+                        >
+                            <FaPlus className="mr-2" />
+                            Add a new Search Engine
+                        </button>
+                    </>
+                );
+            })()}
         </SidebarContainer>
     );
 }

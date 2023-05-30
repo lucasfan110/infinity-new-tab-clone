@@ -122,6 +122,17 @@ const searchEngineSlice = createSlice({
                 state.currentEngine = newEngine.payload;
             }
         },
+        addCustomEngine(state, engine: PayloadAction<CustomizedSearchEngine>) {
+            state.customizedEngines.push(engine.payload);
+        },
+        deleteCustomEngine(
+            state,
+            engineToDelete: PayloadAction<CustomizedSearchEngine>
+        ) {
+            state.customizedEngines = state.customizedEngines.filter(
+                engine => engine.id !== engineToDelete.payload.id
+            );
+        },
     },
 });
 
@@ -131,5 +142,7 @@ export const {
     deleteActiveEngineId,
     resetActiveEngine,
     updateCustomEngine,
+    addCustomEngine,
+    deleteCustomEngine,
 } = searchEngineSlice.actions;
 export default searchEngineSlice.reducer;

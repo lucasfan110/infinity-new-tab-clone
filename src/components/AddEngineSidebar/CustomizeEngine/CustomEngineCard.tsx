@@ -22,10 +22,6 @@ export default function CustomEngineCard({
     onDelete,
     isAdded,
 }: Props) {
-    if (typeof engine.searchUrl !== "string") {
-        throw new Error("Invalid custom engine!");
-    }
-
     const [showContextMenu, setShowContextMenu] = useState(false);
     const buttonRef = useRef<HTMLButtonElement>(null);
     const ctxMenuRef = useRef<HTMLDivElement>(null);
@@ -58,8 +54,6 @@ export default function CustomEngineCard({
     };
 
     const handleAdd = () => {
-        console.log("handleAdd clicked!");
-
         if (isAdded) {
             return;
         }
@@ -69,11 +63,16 @@ export default function CustomEngineCard({
 
     return (
         <div className="flex bg-white h-24 items-center rounded group no-select">
-            <DisplayIcon icon={engine.icon} className="w-16 h-16 ml-4" />
+            <DisplayIcon
+                icon={engine.icon}
+                className="w-16 h-16 ml-4 shrink-0"
+            />
 
-            <div className="ml-4 grow">
+            <div className="ml-4 w-48">
                 <Heading size={6}>{engine.name}</Heading>
-                <p className="text-gray-400 text-xs">{engine.searchUrl}</p>
+                <p className="text-gray-400 text-xs truncate">
+                    {engine.searchUrl}
+                </p>
             </div>
 
             <div className="mr-4 flex justify-end">
