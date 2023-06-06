@@ -45,6 +45,7 @@ export default function CustomizeEngine() {
     const handleAddEngine = () => {
         const handleAdd = (engine: CustomizedSearchEngine) => {
             dispatch(addCustomEngine(engine));
+            handleAddActiveId(engine);
             setUpsertEngElem(null);
         };
 

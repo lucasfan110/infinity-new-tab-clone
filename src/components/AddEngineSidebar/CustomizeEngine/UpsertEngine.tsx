@@ -41,9 +41,54 @@ export default function UpsertEngine({
     const [useDefaultBgText, setUseDefaultBgText] = useState(!hasBgText);
     const [searchUrl, setSearchUrl] = useState(defaultEngine.searchUrl);
     const [icon, setIcon] = useState<Icon>(defaultEngine.icon);
+    const [validations, setValidations] = useState({
+        isEngineNameValidate: true,
+        isSearchUrlValidate: true,
+    });
+
+    /**  Whether if all of the fields in `validations` are true */
+    const isAllValidate = (defaultValidations = validations) =>
+        !Object.values(defaultValidations).some(v => !v);
+
+    const validationFunctions = {
+        validateEngineName({
+            defaultEngineName = engineName,
+            defaultValidation = validations,
+        }) {
+            const newValidations = {
+                ...defaultValidation,
+                isEngineNameValidate: defaultEngineName !== "",
+            };
+            setValidations(newValidations);
+            return newValidations;
+        },
+        validateSearchUrl({
+            defaultSearchUrl = searchUrl,
+            defaultValidation = validations,
+        }) {
+            const newValidations = {
+                ...defaultValidation,
+                isSearchUrlValidate: defaultSearchUrl.includes("%s"),
+            };
+            setValidations(newValidations);
+            return newValidations;
+        },
+    };
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+
+        let defaultValidation = validations;
+        const functions = Object.values(validationFunctions);
+        functions.forEach(validationFunction => {
+            defaultValidation = validationFunction({
+                defaultValidation,
+            });
+        });
+
+        if (!isAllValidate(defaultValidation)) {
+            return;
+        }
 
         onSubmit?.({
             icon,
@@ -54,16 +99,37 @@ export default function UpsertEngine({
     };
 
     const handleEngineNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setEngineName(e.target.value);
+        const engineName = e.target.value;
+
+        setEngineName(engineName);
+        validationFunctions.validateEngineName({
+            defaultEngineName: engineName,
+        });
+
         if (useDefaultBgText && icon.type === "basic") {
             setIcon({ ...icon, bgText: engineNameToBgText(e.target.value) });
         }
     };
 
+    const handleUrlChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+        const searchUrl = e.target.value;
+
+        setSearchUrl(searchUrl);
+        validationFunctions.validateSearchUrl({ defaultSearchUrl: searchUrl });
+    };
+
     return (
         <>
             <form onSubmit={handleSubmit} className="bg-white px-5 py-6 mt-6">
-                <label htmlFor="engine-name">Search Engine</label>
+                <label htmlFor="engine-name" className="text-sm">
+                    <span>Search Engine</span>
+                    <span
+                        hidden={validations.isEngineNameValidate}
+                        className="ml-3 text-red-600 text-xs"
+                    >
+                        *Enter search engine name
+                    </span>
+                </label>
                 <Input
                     id="engine-name"
                     name="engine-name"
@@ -72,7 +138,7 @@ export default function UpsertEngine({
                     onChange={handleEngineNameChange}
                 />
 
-                <label htmlFor="url" className="flex items-center">
+                <label htmlFor="url" className="text-sm flex items-center">
                     Url (use %s to replace search word)
                     <button
                         className="w-4 h-4 ml-2"
@@ -81,13 +147,19 @@ export default function UpsertEngine({
                     >
                         <FaRegQuestionCircle className="text-gray-300 w-full h-full" />
                     </button>
+                    <span
+                        className="ml-1 text-red-600"
+                        hidden={validations.isSearchUrlValidate}
+                    >
+                        *Format error
+                    </span>
                 </label>
                 <TextArea
                     id="url"
                     name="url"
                     placeholder="URL"
                     value={searchUrl}
-                    onChange={e => setSearchUrl(e.target.value)}
+                    onChange={handleUrlChange}
                 />
 
                 <label htmlFor="select-icon">Select Icon</label>
@@ -118,11 +190,11 @@ export default function UpsertEngine({
                 )}
 
                 <div className="flex justify-center align-center flex-col mt-6 mx-10">
-                    <button className="bg-gray-600 text-white h-10 rounded-lg hover:bg-gray-700 transition">
+                    <button className="bg-gray-600 text-white h-10 rounded-lg hover:bg-gray-700 transition text-sm">
                         OK
                     </button>
                     <button
-                        className="bg-gray-200 hover:bg-gray-300 transition text-black h-10 rounded-lg mt-3"
+                        className="bg-gray-200 hover:bg-gray-300 transition text-black h-10 rounded-lg mt-3 text-sm"
                         type="button"
                         onClick={onCancel}
                     >

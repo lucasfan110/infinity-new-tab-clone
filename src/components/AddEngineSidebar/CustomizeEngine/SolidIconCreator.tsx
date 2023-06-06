@@ -109,7 +109,7 @@ export default function SolidIconCreator({
 
     return (
         <TextBubble>
-            <label htmlFor="display-name" className="mb-2">
+            <label htmlFor="display-name" className="mb-2 text-sm">
                 Icon Text
             </label>
             <Input
@@ -117,9 +117,10 @@ export default function SolidIconCreator({
                 id="display-name"
                 value={icon.bgText}
                 onChange={handleIconTextChange}
+                className="text-xs"
             />
 
-            <label htmlFor="text-size" className="mb-2">
+            <label htmlFor="text-size" className="mb-2 text-sm">
                 Text Size
             </label>
             <Range
@@ -136,7 +137,7 @@ export default function SolidIconCreator({
                 id="text-size"
             />
 
-            <label>Color</label>
+            <label className="text-sm">Color</label>
             <div className="mt-2 flex">{renderedColorPickers}</div>
         </TextBubble>
     );
