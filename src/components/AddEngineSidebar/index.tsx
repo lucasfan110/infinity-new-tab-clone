@@ -29,7 +29,7 @@ export default function AddEngineSidebar({ show = true, onClose }: Props) {
                 className={classNames(
                     "absolute right-0 inset-y-0 bg-white z-20 transition-all",
                     {
-                        "w-[50vw] max-w-[400px]": show,
+                        "w-[400px]": show,
                         "w-0 invisible": !show,
                     }
                 )}
