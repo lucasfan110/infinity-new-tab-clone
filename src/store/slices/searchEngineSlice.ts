@@ -1,5 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import _DEFAULT_ENGINE_LIST from "./DEFAULT_ENGINE_LIST.json";
+import {
+    COLORS,
+    DEFAULT_TEXT_SIZE,
+} from "../../components/AddEngineSidebar/CustomizeEngine/SolidIconCreator";
 
 export const ADDITIONAL_ENGINE_KEY = "additionalSearchEngines";
 export const ACTIVE_SEARCH_ENGINES_KEY = "activeSearchEngines";
@@ -8,18 +12,36 @@ export const CURRENT_SEARCH_ENGINE_KEY = "currentSearchEngine";
 export const SEARCH_ENGINE_SLICE_NAME = "searchEngine";
 
 export type BasicIcon = {
-    type: "basic";
     bgColor: string;
     bgText: string;
     bgTextSize: number;
 };
 
 export type ImgIcon = {
-    type: "img";
     url: string;
 };
 
-export type Icon = BasicIcon | ImgIcon;
+export type Icon = {
+    type: "basic" | "img";
+    basicIcon: BasicIcon;
+    imgIcon: ImgIcon | null;
+};
+
+export const DEFAULT_BASIC_ICON: BasicIcon = {
+    bgColor: COLORS[0],
+    bgText: "",
+    bgTextSize: DEFAULT_TEXT_SIZE,
+};
+
+export const DEFAULT_IMG_ICON: ImgIcon = {
+    url: "https://res.cloudinary.com/dxh0z73s8/image/upload/v1659563955/YelpCamp/image-not-found_kyrpw6.webp",
+};
+
+export const DEFAULT_ICON: Icon = {
+    type: "basic",
+    basicIcon: DEFAULT_BASIC_ICON,
+    imgIcon: DEFAULT_IMG_ICON,
+};
 
 export interface BaseSearchEngine {
     id: string;

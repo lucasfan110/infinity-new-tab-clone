@@ -4,7 +4,7 @@ import DisplayIcon from "../../../utils/DisplayIcon";
 import Input from "../../Forms/Input";
 import Range from "../../Forms/Range";
 import TextBubble from "./TextBubble";
-import { BasicIcon } from "../../../store";
+import { BasicIcon, DEFAULT_BASIC_ICON } from "../../../store";
 
 interface Props {
     icon: BasicIcon;
@@ -73,10 +73,13 @@ export default function SolidIconCreator({
             <button key={c} type="button" onClick={() => handleColorSelect(c)}>
                 <DisplayIcon
                     icon={{
-                        bgColor: c,
-                        bgText: "",
-                        bgTextSize: 0,
                         type: "basic",
+                        basicIcon: {
+                            bgColor: c,
+                            bgText: "",
+                            bgTextSize: 0,
+                        },
+                        imgIcon: null,
                     }}
                     className="w-5 h-5 cursor-pointer mr-2 p-1"
                 >
@@ -92,7 +95,11 @@ export default function SolidIconCreator({
             key="custom"
         >
             <DisplayIcon
-                icon={{ type: "img", url: "/images/icons/rainbow.jpg" }}
+                icon={{
+                    type: "img",
+                    imgIcon: { url: "/images/icons/rainbow.jpg" },
+                    basicIcon: DEFAULT_BASIC_ICON,
+                }}
                 className="w-5 h-5 absolute top-0 left-0"
             />
             {colorSelected.type === "custom" && (

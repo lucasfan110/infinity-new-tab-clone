@@ -3,7 +3,14 @@
         "name": "Google",
         "icon": {
             "type": "img",
-            "url": "https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-512.png"
+            "basicIcon": {
+                "bgColor": "#ff4734",
+                "bgText": "",
+                "bgTextSize": 30
+            },
+            "imgIcon": {
+                "url": "https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-512.png"
+            }
         },
         "id": "89b4e228-0f13-4b86-8c83-1d5a3b45ecc9",
         "searchUrl": {
@@ -20,7 +27,14 @@
         "name": "Bing",
         "icon": {
             "type": "img",
-            "url": "https://cdn.vox-cdn.com/thumbor/lw7eaG_tnqPDo-Jy5CVzQ22WyCY=/0x0:660x440/1400x1050/filters:focal(330x220:331x221)/cdn.vox-cdn.com/uploads/chorus_asset/file/21937385/binglogo.jpg"
+            "basicIcon": {
+                "bgColor": "#ff4734",
+                "bgText": "",
+                "bgTextSize": 30
+            },
+            "imgIcon": {
+                "url": "https://cdn.vox-cdn.com/thumbor/lw7eaG_tnqPDo-Jy5CVzQ22WyCY=/0x0:660x440/1400x1050/filters:focal(330x220:331x221)/cdn.vox-cdn.com/uploads/chorus_asset/file/21937385/binglogo.jpg"
+            }
         },
         "id": "bda01e5e-3411-40c9-9430-6887052b7855",
         "searchUrl": {
@@ -36,7 +50,14 @@
         "name": "Yahoo",
         "icon": {
             "type": "img",
-            "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Yahoo%21_icon_%282009-2013%29.svg/1200px-Yahoo%21_icon_%282009-2013%29.svg.png"
+            "basicIcon": {
+                "bgColor": "#ff4734",
+                "bgText": "",
+                "bgTextSize": 30
+            },
+            "imgIcon": {
+                "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Yahoo%21_icon_%282009-2013%29.svg/1200px-Yahoo%21_icon_%282009-2013%29.svg.png"
+            }
         },
         "id": "9ab4c48b-a776-4021-89ac-b1054930a180",
         "searchUrl": {

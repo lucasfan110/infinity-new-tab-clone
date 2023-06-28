@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { FaPlus, FaRegQuestionCircle } from "react-icons/fa";
-import { CustomizedSearchEngine, Icon } from "../../../store";
+import { v4 as uuidv4 } from "uuid";
+import { CustomizedSearchEngine, DEFAULT_ICON, Icon } from "../../../store";
 import DisplayIcon from "../../../utils/DisplayIcon";
 import Input from "../../Forms/Input";
 import TextArea from "../../Forms/TextArea";
 import CustomEngineHowTo from "./CustomEngineHowTo";
-import SolidIconCreator, { DEFAULT_TEXT_SIZE } from "./SolidIconCreator";
-import { v4 as uuidv4 } from "uuid";
+import SolidIconCreator from "./SolidIconCreator";
+import useUploadWidgets from "../../../hooks/useUploadWidget";
 
 interface Props {
     defaultEngine?: CustomizedSearchEngine;
@@ -24,26 +25,25 @@ export default function UpsertEngine({
         id: uuidv4(),
         name: "",
         searchUrl: "",
-        icon: {
-            type: "basic",
-            bgColor: "#ff4734",
-            bgText: "",
-            bgTextSize: DEFAULT_TEXT_SIZE,
-        },
+        icon: DEFAULT_ICON,
     },
     onSubmit,
     onCancel,
 }: Props) {
     const [showHowTo, setShowHowTo] = useState(false);
     const [engineName, setEngineName] = useState(defaultEngine.name);
-    const hasBgText =
-        defaultEngine.icon.type === "basic" && defaultEngine.icon.bgText !== "";
+    const hasBgText = defaultEngine.icon.basicIcon?.bgText !== "";
     const [useDefaultBgText, setUseDefaultBgText] = useState(!hasBgText);
     const [searchUrl, setSearchUrl] = useState(defaultEngine.searchUrl);
     const [icon, setIcon] = useState<Icon>(defaultEngine.icon);
     const [validations, setValidations] = useState({
         isEngineNameValidate: true,
         isSearchUrlValidate: true,
+    });
+    const [, widgetRef] = useUploadWidgets({
+        onUploaded(url) {
+            setIcon({ ...icon, type: "img", imgIcon: { url } });
+        },
     });
 
     /**  Whether if all of the fields in `validations` are true */
@@ -107,7 +107,13 @@ export default function UpsertEngine({
         });
 
         if (useDefaultBgText && icon.type === "basic") {
-            setIcon({ ...icon, bgText: engineNameToBgText(e.target.value) });
+            setIcon({
+                ...icon,
+                basicIcon: {
+                    ...icon.basicIcon,
+                    bgText: engineNameToBgText(e.target.value),
+                },
+            });
         }
     };
 
@@ -116,6 +122,25 @@ export default function UpsertEngine({
 
         setSearchUrl(searchUrl);
         validationFunctions.validateSearchUrl({ defaultSearchUrl: searchUrl });
+    };
+
+    const localIconDisplay = () => {
+        if (icon.type === "basic") {
+            return (
+                <div className="border border-dashed w-full h-full rounded border-2 flex items-center justify-center cursor-pointer">
+                    <FaPlus className="w-1/2 h-1/2 text-gray-300" />
+                </div>
+            );
+        } else {
+            return <DisplayIcon icon={icon} className="w-full h-full" />;
+        }
+    };
+
+    const solidIconDisplay = () => {
+        const iconToDisplay = { ...icon };
+        iconToDisplay.type = "basic";
+
+        return <DisplayIcon icon={iconToDisplay} className="w-full h-full" />;
     };
 
     return (
@@ -166,16 +191,18 @@ export default function UpsertEngine({
 
                 <div className="flex items-center mb-8">
                     <div className="w-14 h-14 my-2 shadow-2xl">
-                        <DisplayIcon icon={icon} className="w-full h-full" />
+                        {solidIconDisplay()}
                         <p className="text-xs">Solid color icon</p>
                     </div>
 
                     <div className="border h-16 w-0 ml-4" />
 
-                    <button className="w-16 h-16 ml-4" type="button">
-                        <div className="border border-dashed w-full h-full rounded border-2 flex items-center justify-center cursor-pointer">
-                            <FaPlus className="w-1/2 h-1/2 text-gray-300" />
-                        </div>
+                    <button
+                        className="w-16 h-16 ml-4"
+                        type="button"
+                        onClick={() => widgetRef.current.open()}
+                    >
+                        {localIconDisplay()}
 
                         <p className="text-xs text-center">Local icon</p>
                     </button>
@@ -183,8 +210,10 @@ export default function UpsertEngine({
 
                 {icon.type === "basic" && (
                     <SolidIconCreator
-                        icon={icon}
-                        onIconChange={icon => setIcon(icon)}
+                        icon={icon.basicIcon}
+                        onIconChange={basicIcon =>
+                            setIcon({ ...icon, basicIcon })
+                        }
                         onIconTextChange={() => setUseDefaultBgText(false)}
                     />
                 )}

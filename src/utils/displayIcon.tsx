@@ -1,4 +1,4 @@
-import { Icon } from "../store";
+import { DEFAULT_BASIC_ICON, Icon } from "../store";
 
 interface Props {
     icon: Icon;
@@ -9,22 +9,23 @@ interface Props {
 export default function DisplayIcon({ icon, className = "", children }: Props) {
     switch (icon.type) {
         case "basic":
+            const basicIcon = icon.basicIcon ?? DEFAULT_BASIC_ICON;
             return (
                 <svg
                     className={`rounded-lg ${className}`}
                     viewBox="0,0,90,90"
                     style={{
-                        backgroundColor: icon.bgColor,
+                        backgroundColor: basicIcon.bgColor,
                     }}
                 >
                     <foreignObject className="w-full h-full">
                         <span
                             className={`text-white flex shrink-0 items-center justify-center truncate w-full h-full`}
                             style={{
-                                fontSize: icon.bgTextSize,
+                                fontSize: basicIcon.bgTextSize,
                             }}
                         >
-                            {icon.bgText}
+                            {basicIcon.bgText}
                             {children}
                         </span>
                     </foreignObject>
@@ -33,7 +34,7 @@ export default function DisplayIcon({ icon, className = "", children }: Props) {
         case "img":
             return (
                 <img
-                    src={icon.url}
+                    src={icon.imgIcon?.url ?? ""}
                     alt="search engine icon"
                     className={className}
                     style={{
