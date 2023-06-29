@@ -7,7 +7,7 @@ import {
 } from "../../store";
 import DisplayIcon from "../../utils/DisplayIcon";
 import Mask from "../Mask";
-import EngineItem from "./EngineItemProps";
+import EngineItem from "./EngineItem";
 
 interface Props {
     show?: boolean;

@@ -21,8 +21,10 @@ export type ImgIcon = {
     url: string;
 };
 
+export type IconType = "basic" | "img";
+
 export type Icon = {
-    type: "basic" | "img";
+    type: IconType;
     basicIcon: BasicIcon;
     imgIcon: ImgIcon | null;
 };
@@ -33,15 +35,20 @@ export const DEFAULT_BASIC_ICON: BasicIcon = {
     bgTextSize: DEFAULT_TEXT_SIZE,
 };
 
-export const DEFAULT_IMG_ICON: ImgIcon = {
-    url: "https://res.cloudinary.com/dxh0z73s8/image/upload/v1659563955/YelpCamp/image-not-found_kyrpw6.webp",
-};
+export const IMG_NOT_FOUND_URL =
+    "https://res.cloudinary.com/dxh0z73s8/image/upload/v1659563955/YelpCamp/image-not-found_kyrpw6.webp";
 
 export const DEFAULT_ICON: Icon = {
     type: "basic",
     basicIcon: DEFAULT_BASIC_ICON,
-    imgIcon: DEFAULT_IMG_ICON,
+    imgIcon: null,
 };
+
+export function newChangedIconType(type: IconType, icon: Icon) {
+    const iconCopy = { ...icon };
+    iconCopy.type = type;
+    return iconCopy;
+}
 
 export interface BaseSearchEngine {
     id: string;
