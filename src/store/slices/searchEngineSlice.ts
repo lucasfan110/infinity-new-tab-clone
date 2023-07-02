@@ -17,7 +17,7 @@ export type BasicIcon = {
     bgTextSize: number;
 };
 
-export type ImgIcon = {
+export type UrlIcon = {
     url: string;
 };
 
@@ -26,7 +26,7 @@ export type IconType = "basic" | "img";
 export type Icon = {
     type: IconType;
     basicIcon: BasicIcon;
-    imgIcon: ImgIcon | null;
+    urlIcon: UrlIcon | null;
 };
 
 export const DEFAULT_BASIC_ICON: BasicIcon = {
@@ -41,7 +41,7 @@ export const IMG_NOT_FOUND_URL =
 export const DEFAULT_ICON: Icon = {
     type: "basic",
     basicIcon: DEFAULT_BASIC_ICON,
-    imgIcon: null,
+    urlIcon: null,
 };
 
 export function newChangedIconType(type: IconType, icon: Icon) {

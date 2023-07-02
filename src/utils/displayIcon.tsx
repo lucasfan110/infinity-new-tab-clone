@@ -34,7 +34,7 @@ export default function DisplayIcon({ icon, className = "", children }: Props) {
         case "img":
             return (
                 <img
-                    src={icon.imgIcon?.url ?? ""}
+                    src={icon.urlIcon?.url ?? ""}
                     alt="search engine icon"
                     className={className}
                     style={{

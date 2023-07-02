@@ -8,7 +8,7 @@
                 "bgText": "",
                 "bgTextSize": 30
             },
-            "imgIcon": {
+            "urlIcon": {
                 "url": "https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-512.png"
             }
         },
@@ -32,7 +32,7 @@
                 "bgText": "",
                 "bgTextSize": 30
             },
-            "imgIcon": {
+            "urlIcon": {
                 "url": "https://cdn.vox-cdn.com/thumbor/lw7eaG_tnqPDo-Jy5CVzQ22WyCY=/0x0:660x440/1400x1050/filters:focal(330x220:331x221)/cdn.vox-cdn.com/uploads/chorus_asset/file/21937385/binglogo.jpg"
             }
         },
@@ -55,7 +55,7 @@
                 "bgText": "",
                 "bgTextSize": 30
             },
-            "imgIcon": {
+            "urlIcon": {
                 "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Yahoo%21_icon_%282009-2013%29.svg/1200px-Yahoo%21_icon_%282009-2013%29.svg.png"
             }
         },

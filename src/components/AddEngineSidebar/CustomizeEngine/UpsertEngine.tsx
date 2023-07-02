@@ -2,7 +2,6 @@ import { useState } from "react";
 import { FaPlus, FaRegQuestionCircle } from "react-icons/fa";
 import { FaXmark } from "react-icons/fa6";
 import { v4 as uuidv4 } from "uuid";
-import useUploadWidgets from "../../../hooks/useUploadWidget";
 import {
     CustomizedSearchEngine,
     DEFAULT_ICON,
@@ -14,6 +13,7 @@ import Input from "../../Forms/Input";
 import TextArea from "../../Forms/TextArea";
 import CustomEngineHowTo from "./CustomEngineHowTo";
 import SolidIconCreator from "./SolidIconCreator";
+import UrlIconCreator from "./UrlIconCreator";
 
 interface Props {
     defaultEngine?: CustomizedSearchEngine;
@@ -46,11 +46,11 @@ export default function UpsertEngine({
         isEngineNameValidate: true,
         isSearchUrlValidate: true,
     });
-    const [, widgetRef] = useUploadWidgets({
-        onUploaded(url) {
-            setIcon({ ...icon, type: "img", imgIcon: { url } });
-        },
-    });
+    // const [, widgetRef] = useUploadWidgets({
+    //     onUploaded(url) {
+    //         setIcon({ ...icon, type: "img", imgIcon: { url } });
+    //     },
+    // });
 
     /**  Whether if all of the fields in `validations` are true */
     const isAllValidate = (defaultValidations = validations) =>
@@ -136,8 +136,8 @@ export default function UpsertEngine({
         event.stopPropagation();
     };
 
-    const localIconDisplay = () => {
-        if (icon.imgIcon === null) {
+    const urlIconDisplay = () => {
+        if (icon.urlIcon === null) {
             return (
                 <div className="border border-dashed w-full h-full rounded border-2 flex items-center justify-center cursor-pointer">
                     <FaPlus className="w-1/2 h-1/2 text-gray-300" />
@@ -176,8 +176,21 @@ export default function UpsertEngine({
     };
 
     const handleLocalIconClick = () => {
-        widgetRef.current.open();
         setIcon({ ...icon, type: "img" });
+    };
+
+    const displayIconCreator = () => {
+        if (icon.type === "basic") {
+            return (
+                <SolidIconCreator
+                    icon={icon.basicIcon}
+                    onIconChange={basicIcon => setIcon({ ...icon, basicIcon })}
+                    onIconTextChange={() => setUseDefaultBgText(false)}
+                />
+            );
+        } else {
+            return <UrlIconCreator />;
+        }
     };
 
     return (
@@ -241,20 +254,12 @@ export default function UpsertEngine({
                         className="w-16 h-16 ml-4 cursor-pointer"
                         onClick={handleLocalIconClick}
                     >
-                        {localIconDisplay()}
-                        <p className="text-xs text-center">Local icon</p>
+                        {urlIconDisplay()}
+                        <p className="text-xs text-center">Url icon</p>
                     </div>
                 </div>
 
-                {icon.type === "basic" && (
-                    <SolidIconCreator
-                        icon={icon.basicIcon}
-                        onIconChange={basicIcon =>
-                            setIcon({ ...icon, basicIcon })
-                        }
-                        onIconTextChange={() => setUseDefaultBgText(false)}
-                    />
-                )}
+                {displayIconCreator()}
 
                 <div className="flex justify-center align-center flex-col mt-6 mx-10">
                     <button className="bg-gray-600 text-white h-10 rounded-lg hover:bg-gray-700 transition text-sm">

@@ -79,7 +79,7 @@ export default function SolidIconCreator({
                             bgText: "",
                             bgTextSize: 0,
                         },
-                        imgIcon: null,
+                        urlIcon: null,
                     }}
                     className="w-5 h-5 cursor-pointer mr-2 p-1"
                 >
@@ -97,7 +97,7 @@ export default function SolidIconCreator({
             <DisplayIcon
                 icon={{
                     type: "img",
-                    imgIcon: { url: "/images/icons/rainbow.jpg" },
+                    urlIcon: { url: "/images/icons/rainbow.jpg" },
                     basicIcon: DEFAULT_BASIC_ICON,
                 }}
                 className="w-5 h-5 absolute top-0 left-0"
