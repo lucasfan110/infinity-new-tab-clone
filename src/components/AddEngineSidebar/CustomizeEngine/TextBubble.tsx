@@ -1,17 +1,32 @@
-import classNames from "classnames";
-import "./TextBubble.css";
+/** @jsxImportSource @emotion/react */
+import { css } from "@emotion/react";
 
-interface Props extends React.ComponentPropsWithoutRef<"div"> {}
+interface Props extends React.ComponentPropsWithoutRef<"div"> {
+    arrowLeftMargin?: string;
+}
 
-export default function TextBubble({ className, ...props }: Props) {
-    return (
-        <div
-            className={classNames(
-                "text-bubble",
-                "relative bg-gray-100 m-1 p-4",
-                className
-            )}
-            {...props}
-        />
-    );
+export default function TextBubble({
+    arrowLeftMargin = "12%",
+    ...props
+}: Props) {
+    const style = css({
+        "::before": {
+            content: '""',
+            position: "absolute",
+            width: 0,
+            height: 0,
+            left: arrowLeftMargin,
+            top: "-8px",
+            borderLeft: "8px solid transparent",
+            borderRight: "8px solid transparent",
+            borderBottom: "8px solid rgb(243 244 246)",
+        },
+
+        position: "relative",
+        backgroundColor: "rgb(243 244 246)",
+        margin: "2px",
+        padding: "8px",
+    });
+
+    return <div css={style} {...props} />;
 }

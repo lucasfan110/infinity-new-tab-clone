@@ -1,7 +1,14 @@
-export default function UrlIconCreator() {
+import Input from "../../Forms/Input";
+import TextBubble from "./TextBubble";
+
+interface Props {}
+
+export default function UrlIconCreator({}: Props) {
     return (
-        <div>
-            <input />
-        </div>
+        <TextBubble>
+            <label>Url Link</label>
+
+            <Input />
+        </TextBubble>
     );
 }
