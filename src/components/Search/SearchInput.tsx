@@ -21,7 +21,10 @@ export default function SearchInput({
     );
 
     const icon = (
-        <DisplayIcon icon={engine.icon} className="inline-block w-9 h-9 mx-1" />
+        <DisplayIcon
+            icon={engine.icon}
+            className="inline-block w-full h-full rounded-lg object-center object-cover"
+        />
     );
 
     const handleIconSwitch = () => {
@@ -39,7 +42,7 @@ export default function SearchInput({
                 className="h-14 basis-14 flex justify-center items-center cursor-pointer hover:bg-slate-200 hover:rounded-l-lg select-none"
                 onClick={handleIconSwitch}
             >
-                {icon}
+                <div className="w-9 h-9 ml-2 mr-1">{icon}</div>
                 <FaCaretDown className="mr-1" />
             </div>
 

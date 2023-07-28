@@ -41,7 +41,10 @@ export default function SearchEngineSelect({
 
     const renderedEngineList = activeEnginesList.map(engine => {
         const icon = (
-            <DisplayIcon icon={engine.icon} className="w-12 h-12 mt-4" />
+            <DisplayIcon
+                icon={engine.icon}
+                className="w-12 h-12 mt-4 object-center object-cover rounded-lg"
+            />
         );
         const showDelete = activeEnginesList.length > 1;
 

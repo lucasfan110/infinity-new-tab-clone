@@ -65,7 +65,7 @@ export default function CustomEngineCard({
         <div className="flex bg-white h-24 items-center rounded group no-select mb-4">
             <DisplayIcon
                 icon={engine.icon}
-                className="w-16 h-16 ml-4 shrink-0"
+                className="w-16 h-16 ml-4 shrink-0 object-center object-cover rounded-lg"
             />
 
             <div className="ml-4 w-48">
