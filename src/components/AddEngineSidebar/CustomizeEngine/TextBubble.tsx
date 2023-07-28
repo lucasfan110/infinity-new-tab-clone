@@ -5,10 +5,7 @@ interface Props extends React.ComponentPropsWithoutRef<"div"> {
     arrowLeftMargin?: string;
 }
 
-export default function TextBubble({
-    arrowLeftMargin = "12%",
-    ...props
-}: Props) {
+export default function TextBubble({ arrowLeftMargin = "0", ...props }: Props) {
     const style = css({
         "::before": {
             content: '""',
@@ -25,8 +22,8 @@ export default function TextBubble({
         position: "relative",
         backgroundColor: "rgb(243 244 246)",
         margin: "2px",
-        padding: "8px",
+        // padding: "8px",
     });
 
-    return <div css={style} {...props} />;
+    return <div className={props.className} css={style} {...props} />;
 }

@@ -115,7 +115,7 @@ export default function SolidIconCreator({
     );
 
     return (
-        <TextBubble>
+        <TextBubble arrowLeftMargin="5%" className="p-4">
             <label htmlFor="display-name" className="mb-2 text-sm">
                 Icon Text
             </label>
@@ -124,7 +124,7 @@ export default function SolidIconCreator({
                 id="display-name"
                 value={icon.bgText}
                 onChange={handleIconTextChange}
-                className="text-xs"
+                className="text-sm"
             />
 
             <label htmlFor="text-size" className="mb-2 text-sm">

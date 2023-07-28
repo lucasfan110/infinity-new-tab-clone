@@ -40,6 +40,7 @@ input[type="range"] {
     appearance: none;
     outline: none;
     cursor: pointer;
+    background-color: transparent;
 }
 
 input[type="range"]::-webkit-slider-runnable-track {
@@ -48,7 +49,24 @@ input[type="range"]::-webkit-slider-runnable-track {
     border-radius: 2px;
 }
 
+input[type="range"]::-moz-range-track {
+    background-color: #333;
+    height: 2px;
+    border-radius: 2px;
+}
+
 input[type="range"]::-webkit-slider-thumb {
+    appearance: none;
+    background-color: white;
+    border: 2px solid #333;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-top: -10px;
+}
+
+input[type="range"]::-moz-range-thumb {
+
     appearance: none;
     background-color: white;
     border: 2px solid #333;

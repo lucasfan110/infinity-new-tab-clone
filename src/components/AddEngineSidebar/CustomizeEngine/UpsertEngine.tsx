@@ -46,11 +46,6 @@ export default function UpsertEngine({
         isEngineNameValidate: true,
         isSearchUrlValidate: true,
     });
-    // const [, widgetRef] = useUploadWidgets({
-    //     onUploaded(url) {
-    //         setIcon({ ...icon, type: "img", imgIcon: { url } });
-    //     },
-    // });
 
     /**  Whether if all of the fields in `validations` are true */
     const isAllValidate = (defaultValidations = validations) =>
@@ -139,13 +134,13 @@ export default function UpsertEngine({
     const urlIconDisplay = () => {
         if (icon.urlIcon === null) {
             return (
-                <div className="border border-dashed w-full h-full rounded border-2 flex items-center justify-center cursor-pointer">
+                <div className="border border-dashed w-full h-full rounded-lg border-2 flex items-center justify-center cursor-pointer">
                     <FaPlus className="w-1/2 h-1/2 text-gray-300" />
                 </div>
             );
         } else {
             return (
-                <div className="group relative">
+                <div className="group relative w-full h-full">
                     <button
                         className="absolute top-[-5px] right-[-5px] bg-gray-700 rounded-full"
                         type="button"
@@ -155,7 +150,7 @@ export default function UpsertEngine({
                     </button>
                     <DisplayIcon
                         icon={newChangedIconType("img", icon)}
-                        className="w-full h-full"
+                        className="w-full h-full object-center object-cover rounded-lg"
                     />
                 </div>
             );
@@ -189,7 +184,14 @@ export default function UpsertEngine({
                 />
             );
         } else {
-            return <UrlIconCreator />;
+            return (
+                <UrlIconCreator
+                    urlLink={icon.urlIcon?.url}
+                    onUrlLinkChange={url =>
+                        setIcon({ ...icon, urlIcon: { url } })
+                    }
+                />
+            );
         }
     };
 
@@ -251,7 +253,7 @@ export default function UpsertEngine({
                     <div className="border h-16 w-0 ml-4" />
 
                     <div
-                        className="w-16 h-16 ml-4 cursor-pointer"
+                        className="w-14 h-14 ml-4 cursor-pointer"
                         onClick={handleLocalIconClick}
                     >
                         {urlIconDisplay()}
