@@ -20,7 +20,7 @@ export default function UrlIconCreator({ urlLink, onUrlLinkChange }: Props) {
             <Input
                 placeholder="URL link to the image"
                 className="text-sm"
-                value={urlLink}
+                value={urlLink ?? ""}
                 onChange={onInputChange}
             />
 

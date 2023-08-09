@@ -20,8 +20,7 @@
             "Videos": "https://www.google.com/search?tbm=vid&q=%s",
             "Maps": "https://www.google.com/maps/preview?q=%s"
         },
-        "description": "Google Search Engine is a web search engine developed by Google. It is the most widely used search engine in the world, handling billions of queries each day. Google Search uses a sophisticated algorithm to analyze the vast amount of information on the internet and provide relevant, high-quality results to users.",
-        "isActive": true
+        "description": "Google Search Engine is a web search engine developed by Google. It is the most widely used search engine in the world, handling billions of queries each day. Google Search uses a sophisticated algorithm to analyze the vast amount of information on the internet and provide relevant, high-quality results to users."
     },
     {
         "name": "Bing",
@@ -43,8 +42,7 @@
             "Videos": "https://www.bing.com/videos/search?q=%s",
             "Maps": "https://www.bing.com/maps?q=%s"
         },
-        "description": "Bing is a search engine developed by Microsoft. It was launched in 2009 as a replacement for Microsoft's previous search engines, including Live Search, Windows Live Search and MSN Search.",
-        "isActive": false
+        "description": "Bing is a search engine developed by Microsoft. It was launched in 2009 as a replacement for Microsoft's previous search engines, including Live Search, Windows Live Search and MSN Search."
     },
     {
         "name": "Yahoo",
@@ -66,7 +64,6 @@
             "News": "https://news.search.yahoo.com/search?p=%s",
             "Videos": "https://video.search.yahoo.com/search/video?p=%s"
         },
-        "description": "Yahoo is a web services provider that was founded in 1994. It began as a search engine and web portal, but has since expanded to include a wide range of products and services, including email, news, finance, sports, and more.",
-        "isActive": false
+        "description": "Yahoo is a web services provider that was founded in 1994. It began as a search engine and web portal, but has since expanded to include a wide range of products and services, including email, news, finance, sports, and more."
     }
 ]

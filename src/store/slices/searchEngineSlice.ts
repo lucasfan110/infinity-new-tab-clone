@@ -59,7 +59,6 @@ export interface BaseSearchEngine {
 
 export interface DefaultSearchEngine extends BaseSearchEngine {
     description: string;
-    isActive: boolean;
 }
 
 export interface CustomizedSearchEngine extends BaseSearchEngine {
@@ -96,7 +95,8 @@ function initiateSlice(): SliceType {
 
     const allEnginesList = [...DEFAULT_ENGINE_LIST, ...additionalEngineList];
     const activeEngineIds: string[] = JSON.parse(
-        localStorage.getItem(ACTIVE_SEARCH_ENGINES_KEY) || "[]"
+        localStorage.getItem(ACTIVE_SEARCH_ENGINES_KEY) ||
+            JSON.stringify(DEFAULT_ENGINE_LIST.map(e => e.id))
     );
 
     const activeEngineId =
@@ -107,11 +107,13 @@ function initiateSlice(): SliceType {
         allEnginesList.find(s => s.id === activeEngineId) ??
         DEFAULT_ENGINE_LIST[0];
 
-    return {
+    const slice = {
         customizedEngines: additionalEngineList,
         activeEngineIds,
         currentEngine,
     };
+
+    return slice;
 }
 
 const searchEngineSlice = createSlice({

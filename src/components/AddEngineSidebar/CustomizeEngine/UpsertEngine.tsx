@@ -125,7 +125,7 @@ export default function UpsertEngine({
         validationFunctions.validateSearchUrl({ defaultSearchUrl: searchUrl });
     };
 
-    const handleLocalIconDelete = (
+    const handleUrlIconDelete = (
         event: React.MouseEvent<HTMLButtonElement, MouseEvent>
     ) => {
         event.stopPropagation();
@@ -144,9 +144,9 @@ export default function UpsertEngine({
                     <button
                         className="absolute top-[-5px] right-[-5px] bg-gray-700 rounded-full"
                         type="button"
-                        onClick={handleLocalIconDelete}
+                        onClick={handleUrlIconDelete}
                     >
-                        <FaXmark className="text-white m-0.5" />
+                        <FaXmark className="text-white" />
                     </button>
                     <DisplayIcon
                         icon={newChangedIconType("img", icon)}
