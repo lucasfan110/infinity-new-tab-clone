@@ -5,6 +5,12 @@ import {
     PAGES_KEY,
     RootState,
 } from "..";
+import * as customWebsiteSlice from "../slices/customWebsitesSlice";
+
+export function saveCustomWebsites(state: customWebsiteSlice.SliceType) {
+    localStorage.setItem(CURRENT_PAGE_KEY, state.currentPage.toString());
+    localStorage.setItem(PAGES_KEY, JSON.stringify(state.pages));
+}
 
 export const customWebsitesMiddleware: Middleware<{}, RootState> =
     store => next => action => {
@@ -13,11 +19,7 @@ export const customWebsitesMiddleware: Middleware<{}, RootState> =
         if (action.type?.startsWith(`${CUSTOM_WEBSITES_SLICE_NAME}/`)) {
             const state = store.getState().customWebsites;
 
-            localStorage.setItem(
-                CURRENT_PAGE_KEY,
-                state.currentPage.toString()
-            );
-            localStorage.setItem(PAGES_KEY, JSON.stringify(state.pages));
+            saveCustomWebsites(state);
         }
 
         return result;
